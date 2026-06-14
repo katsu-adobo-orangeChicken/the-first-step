@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 General Discussion
+    url: https://github.com/katsu-adobo-orangeChicken/the-first-step/discussions
+    about: Use this to brainstorm project tracks or team roles before opening a formal issue.
