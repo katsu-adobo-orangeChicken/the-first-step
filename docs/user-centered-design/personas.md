@@ -11,7 +11,7 @@
 | Medium to High | Product Internship, Product Marketing, APMM, project/program roles | Undergrad-friendly paths often sit in product-adjacent roles where projects and classes are acceptable evidence. |
 | Lower for launch | Classic undergraduate PM-only roles | Many product manager roles require prior experience; some internship pathways are MBA-targeted, so undergrads often enter through adjacent roles first. This is an inference from official postings.|
 
-### Persona A
+### Persona A: Sophia Kim | The Escapee of Tutorial & AI Hell
 
 **Name:** Sophie Kim  
 **Age / Year:** 19, Sophomore  
@@ -20,38 +20,45 @@
 **Best-fit internships and jobs:** Google Software Engineering Intern, Microsoft Explore, Capital One Technology or Data Analytics internship, early-stage startup engineering intern.
 
 **Background**  
-Sophie studies hard, does fine in classes, and may even be grinding interview prep, but she knows class assignments alone are weak evidence compared with real product work. She is exactly the kind of student who can code basic features and debug assignments, but has not yet shipped a complete project with teammates, user feedback, documentation, and iteration. That gap matters because official internship pathways for underclass students in tech are real, but competitive, and they reward students who can demonstrate more than coursework. 
+Sophie studies hard, does fine in classes, and may even be grinding interview prep. However, she has fallen into a dual learning trap common among computer science students: **Tutorial Hell** and the **AI Crutch**. This manifests as a habit of grinding out online certificates and following YouTube tutorial code-along videos line-by-line, which results in surface-level knowledge consumption without deep understanding. Furthermore, she heavily relies on large language models to generate massive blocks of code that she does not fully comprehend. 
+
+She understands that class assignments alone are not enough in today's tight internship market. While she values real product work, she frequently freezes when facing an ambiguous, blank text editor without a video guide or a prompt box feeding her the next lines of code. She is exactly the kind of student who can code basic features and debug assignments, but has not yet shipped a complete project with teammates, user feedback, documentation, and iteration. That gap matters because official internship pathways for underclass students in tech are highly competitive, and they reward students who can demonstrate real-world execution beyond basic coursework.
 
 **Motivations and goals**  
-Sophie wants one credible project that proves she can build, collaborate, and finish. Her near-term goal is not “becoming a senior engineer”; it is reaching the next internship cycle with a better resume, stronger interview stories, and a GitHub profile that shows initiative. That aligns with NACE’s finding that employers want evidence of problem-solving, teamwork, written communication, initiative, and technical skill on student resumes.
+Sophie wants one credible project that proves she can design, build, collaborate, and finish within a team environment. Her near-term goal is not “becoming a senior engineer”; it is reaching the next internship cycle with a better resume, stronger interview stories, and a GitHub profile that shows authentic initiative. This aligns directly with NACE’s findings that employers want clear evidence of problem-solving, teamwork, written communication, initiative, and technical skill on student resumes.
 
 **Pain points**  
-Her pain is usually not lack of effort. It is uncertainty and fragmentation. She does not know what project is “good enough,” she cannot easily find reliable teammates, and most existing channels feel either too noisy or too advanced. In a tighter internship market, that uncertainty becomes expensive because waiting another semester means entering recruiting with little proof beyond classes. 
+Her pain is usually not a lack of effort. It is uncertainty, fragmentation, and the "illusion of competence" built by passive copying. She does not know what project is “good enough,” she struggles to translate abstract ideas into structured code architectures, and she cannot easily find reliable, similarly-paced teammates. Most existing collaboration channels feel either too noisy or too advanced. In a tighter internship market, that uncertainty becomes expensive because waiting another semester means entering recruiting with little proof beyond her standard classes.
 
 **Typical behaviors**  
-Sophie tends to browse internship listings and role descriptions, compare herself to stronger candidates, save side-project ideas she never scopes properly, and work alone longer than she should. She is highly comfortable with technical tools, but less comfortable with project scoping, role definition, and cross-functional collaboration.
+Sophie tends to browse internship listings and role descriptions, compare herself negatively to stronger candidates, save side-project ideas she never scopes properly, and work alone longer than she should. She defaults back to watching tutorials or prompting AI assistants to "feel productive". While she is highly comfortable with modular technical tools, she is significantly less comfortable with independent project scoping, role definition, tracing bugs in synthesized code, and cross-functional collaboration.
 
 **Tech comfort**  
-Very high. Comfortable with Git, IDEs, command line tools, cloud basics, and learning from documentation. Less comfortable with ambiguous product requirements and project management.
+* **Very High**: Comfortable with Git syntax, IDEs, command line tools, cloud basics, prompting for localized snippets, and learning from documentation. 
+* **Friction Points**: Much less comfortable with ambiguous product requirements, multi-file software architecture, and agile project management frameworks.
 
 **Preferred channels**  
-Handshake and employer career pages for internships, LinkedIn for role research, GitHub for social proof, Discord/group chats for peers, and university career center resources when deadlines get real. This channel mix is consistent with how official career resources position job search, employer discovery, and short-form professional project experiences.
+Handshake and employer career pages for internships, LinkedIn for role research, GitHub for social proof, Discord/group chats for peers, and university career center resources when deadlines get real. This channel mix is consistent with how official career resources position job searching, employer discovery, and short-form professional project experiences.
 
 **What she needs from the platform**  
-She needs scoped project tracks, a defined developer role, teammates who are serious but still beginner-friendly, weekly milestones, and a final package she can reuse in applications: deployed demo, GitHub repo, README, short architecture note, and resume bullets. That need is reinforced by career-center guidance that project-based experiences and portfolios help students demonstrate skills and explore pathways. 
+She needs a structured bridge out of tutorial and AI hell. This includes pre-scoped project tracks, a defined developer role, and teammates who are serious but still beginner-friendly. She requires weekly milestones to prevent scope creep, clear deliverable boundaries to force her to understand and document her code, and a final package she can reuse in applications: a deployed demo, a clean GitHub repo with active contribution logs, a README, a short architecture note, and optimized resume bullets. This target is reinforced by career-center guidance stating that project-based experiences and portfolios help students demonstrate concrete skills to recruiters.
+
+---
 
 #### Recommended project tracks and outputs for Sophie
 
 | Project track | Recommended final outputs | Best internship or job mapping |
 |---|---|---|
-| Full-stack campus tool | GitHub repo, deployed web app, README, architecture diagram, demo video, two resume bullets | Software Engineering Intern, Microsoft Explore, startup SWE intern.|
-| Data dashboard for a student problem | SQL/Python notebook, dashboard, findings memo, GitHub repo, resume bullet | Data Analytics Intern, Data/ML-adjacent intern. |
-| AI or ML feature prototype | Model evaluation memo, repo, lightweight product spec, demo, results summary | AI/ML research or engineering-adjacent internship, technical product internship.|
-| API/backend reliability project | API documentation, test suite, CI pipeline notes, observability screenshots, repo | Backend engineering intern, platform or cloud-adjacent intern. This is an inference from SWE internship role expectations.|
+| **Full-stack campus tool** | GitHub repo, deployed web app, README, architecture diagram, demo video, two resume bullets | Software Engineering Intern, Microsoft Explore, startup SWE intern. |
+| **Data dashboard for a student problem** | SQL/Python notebook, dashboard, findings memo, GitHub repo, resume bullet | Data Analytics Intern, Data/ML-adjacent intern. |
+| **AI or ML feature prototype** | Model evaluation memo, repo, lightweight product spec, demo, results summary | AI/ML research or engineering-adjacent internship, technical product internship. |
+| **API/backend reliability project** | API documentation, test suite, CI pipeline notes, observability screenshots, repo | Backend engineering intern, platform or cloud-adjacent intern. (Inferred from SWE internship role expectations). |
+
+---
 
 **Sample resume bullets**  
-- Built and deployed a full-stack web application with a team of four, implementing authentication, REST APIs, and analytics to support 300+ simulated student users.  
-- Designed a Python and SQL dashboard analyzing user behavior data, identifying three retention issues and proposing product changes backed by quantified findings.
+* Built and deployed a full-stack web application with a team of four, implementing authentication, REST APIs, and analytics to support 300+ simulated student users.  
+* Designed a Python and SQL dashboard analyzing user behavior data, identifying three retention issues and proposing product changes backed by quantified findings.
 
 ### Persona B
 
