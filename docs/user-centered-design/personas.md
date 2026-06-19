@@ -126,7 +126,7 @@ Maya wants to become a UI/UX designer but lacks portfolio-ready projects. Most o
 
 She understands design tools like Figma and canvas but has limited experience working on real product problems or collaborating with cross-functional teams.
 
-It is hard for them to find collaborative projects, sice there are no platforms such people can find collaborativge projects easily like beginner friendly. This makes her experience look insufficient and there are not solid things to talk about in interview. 
+It is hard for them to find collaborative projects, sice there are no platforms such people can find collaborative projects easily like beginner friendly. This makes her experience look insufficient and there are not solid things to talk about in interview. 
 
 Main Goal
 
