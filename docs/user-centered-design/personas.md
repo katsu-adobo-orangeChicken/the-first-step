@@ -110,3 +110,89 @@ He needs career-track-specific projects, explicit role definitions such as Produ
 | Best platform promise | “Build something real” | “Turn interest into recruiter-legible experience” | “Create a portfolio-ready case study” |
 
 The comparison above is a design synthesis grounded in employer expectations for teamwork, problem-solving, technical skill, communication, project ownership, and portfolio-style evidence. 
+
+Persona: UI/UX Designer
+Persona Overview
+
+Name: Maya Hernandez
+Age: 20
+Year: Sophomore / Junior
+Target Role: UI/UX Designer or Product Design Intern
+Experience Level: Beginner
+
+Background
+
+Maya wants to become a UI/UX designer but lacks portfolio-ready projects. Most of her experience comes from coursework, tutorials, and personal redesign projects.
+
+She understands design tools like Figma and canvas but has limited experience working on real product problems or collaborating with cross-functional teams.
+
+It is hard for them to find collaborative projects, sice there are no platforms such people can find collaborativge projects easily like beginner friendly. This makes her experience look insufficient and there are not solid things to talk about in interview. 
+
+Main Goal
+
+Build a strong UX case study that demonstrates:
+
+User research
+Problem-solving
+Wireframing and prototyping
+Design decision-making
+Collaboration with teammates
+
+The goal is to create a portfolio project that can be used for internship applications.
+
+Pain Points
+1. Lack of Portfolio Projects
+
+Most of Maya's work consists of class assignments that do not feel strong enough for internship applications.
+
+2. Unclear Expectations
+
+She is unsure what recruiters expect from a beginner UX portfolio and what makes a case study stand out.
+
+3. Limited Real-World Experience
+
+Most projects are completed individually, making them feel less realistic than actual product work.
+
+4. Difficulty Finding Teammates
+
+She wants to collaborate with developers and product-minded students but struggles to find committed teammates.
+
+Concerns
+Is my portfolio good enough for internships?
+What kind of project should I build?
+How do I create a realistic UX case study?
+How do I explain my design process effectively?
+What She Needs From the Platform
+Portfolio-focused UX projects
+Clear project milestones
+Cross-functional teammates
+Guidance on UX process and deliverables
+Templates for research and case studies
+Feedback on design work
+Ideal Project Experience
+
+Maya joins a UX project team and works on a realistic product problem.
+
+Her responsibilities include:
+
+Conducting user research
+Creating user flows and wireframes
+Building a Figma prototype
+Testing and refining designs
+Documenting the process as a case study
+Expected Deliverables
+
+By the end of the project, Maya should have:
+
+A complete UX case study
+A polished Figma prototype
+User research findings
+Resume-ready project experience
+A portfolio piece for internship applications
+User Story
+
+As a beginner UI/UX designer, I want to work on a structured team project that results in a portfolio-ready case study so that I can become a stronger candidate for design internships.
+
+Summary
+
+Maya is a beginner designer whose biggest challenge is building a strong portfolio. She needs structured projects, collaboration opportunities, and guidance through the UX process to create internship-ready case studies.
