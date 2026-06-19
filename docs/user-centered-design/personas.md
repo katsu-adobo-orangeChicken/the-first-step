@@ -111,126 +111,37 @@ He needs career-track-specific projects, explicit role definitions such as Produ
 
 The comparison above is a design synthesis grounded in employer expectations for teamwork, problem-solving, technical skill, communication, project ownership, and portfolio-style evidence. 
 
-Persona C
-Name
+### Persona C
 
-Maya Hernandez
+**Name:** Maya Hernandez  
+**Age / Year:** 20, Sophomore or Junior  
+**Major:** Design, Human-Computer Interaction (HCI), Cognitive Science, Psychology, Communication, Computer Science, or a related field  
+**Career Goal:** UI/UX Designer, Product Designer, UX Researcher, Design Systems Intern, or Product Design Intern  
+**Best-fit internships and jobs:** Google UX Design Intern, Microsoft Product Design Intern, Adobe Design Internship, Figma Design Internship, UX Research Internship, Product Design Internship, Design Systems Internship, or other entry-level UX and product design pathways.
 
-Age / Year
+**Background** Maya is a motivated student who wants to build a career in UI/UX or product design, but her experience is mostly limited to coursework, tutorials, design challenges, and personal redesign projects. She understands design fundamentals and tools such as Figma, but she lacks portfolio-ready projects that demonstrate how she approaches real user problems from research through final solution. Like many aspiring designers, Maya knows that recruiters evaluate portfolios more heavily than grades. However, finding realistic projects and committed collaborators is difficult. Most of her work is completed independently, making it harder to demonstrate teamwork, stakeholder communication, and cross-functional collaboration. She wants opportunities that feel closer to real product work and produce tangible artifacts she can confidently discuss during interviews.
 
-20, Sophomore or Junior
+**Motivations and goals** Maya wants portfolio projects that are credible and recruiter-friendly. She is not looking for isolated design exercises or simple screen redesigns. Instead, she wants experiences that demonstrate her ability to understand user needs, conduct research, define product problems, wireframe, prototype, test, and collaborate with cross-functional teammates. A strong project gives her a complete case study that showcases both process and outcomes. The final result should help her stand out in internship applications and portfolio reviews.
 
-Major
+**Pain points** Maya's biggest challenge is building portfolio evidence that feels realistic and professionally relevant. Most of her projects come from classes or personal practice, which often lack the depth and structure expected in internship portfolios. She faces uncertainty about what recruiters value most in a beginner portfolio—such as the proper balance between research, visual design, and storytelling. Furthermore, because she works independently, she has limited experience working with developers or product managers, and she struggles to find committed students who share similar goals.
 
-Design, Human-Computer Interaction (HCI), Cognitive Science, Psychology, Communication, Computer Science, or a related field
+**Typical behaviors** Maya spends time improving her skills by watching UX and product design tutorials, practicing in Figma, exploring professional portfolios online, and participating in design clubs or communities. She follows designers on LinkedIn, completes redesign challenges, and actively seeks feedback from peers. She is highly motivated but lacks a structured environment that turns learning into portfolio-ready outcomes.
 
-Career Goal
-UI/UX Designer, Product Designer, UX Researcher, Design Systems Intern, or Product Design Intern
+**Tech comfort** Moderate to high. Very comfortable with design tools such as Figma, FigJam, Canva, and presentation software. Familiar with basic prototyping, wireframing, and design systems concepts. May have limited coding experience but can collaborate effectively with technical teammates.
 
-Best-Fit Internships and Jobs
+**Preferred channels** LinkedIn, Handshake, design clubs, portfolio communities, UX Discord groups, university career centers, employer events, and design-focused networking opportunities.
 
-Google UX Design Intern, Microsoft Product Design Intern, Adobe Design Internship, Figma Design Internship, UX Research Internship, Product Design Internship, Design Systems Internship, or other entry-level UX and product design pathways.
+**What she needs from the platform** She needs portfolio-focused projects, clear role expectations, structured milestones, and opportunities to collaborate with students from technical and business backgrounds. Specifically, she benefits from UX/product design tracks, templates for research and usability testing, portfolio case-study frameworks, and cross-functional team matching. Most importantly, she needs a process that transforms collaboration into tangible outputs such as research findings, wireframes, prototypes, usability reports, and portfolio-ready case studies.
 
-Background
+#### Recommended project tracks and outputs for Maya
 
-Maya is a motivated student who wants to build a career in UI/UX or product design, but her experience is mostly limited to coursework, tutorials, design challenges, and personal redesign projects. She understands design fundamentals and tools such as Figma, but she lacks portfolio-ready projects that demonstrate how she approaches real user problems from research through final solution.
+| Project track | Recommended final outputs | Best internship or job mapping |
+|---|---|---|
+| Mobile app redesign | User research summary, wireframes, high-fidelity prototype, UX case study | UX Design Intern, Product Design Intern |
+| Product discovery and UX research | Interview findings, personas, journey maps, usability recommendations | UX Research Intern, Product Design Intern |
+| Campus platform redesign | Information architecture, user flows, prototype, case study | Product Design, UX Design |
+| Design systems project | Component library, design documentation, implementation recommendations | Design Systems Intern |
+| Startup product design project | Research synthesis, prototype, usability testing report, presentation deck | Product Design, Startup Design Intern |
 
-Like many aspiring designers, Maya knows that recruiters evaluate portfolios more heavily than grades. However, finding realistic projects and committed collaborators is difficult. Most of her work is completed independently, making it harder to demonstrate teamwork, stakeholder communication, and cross-functional collaboration.
-
-She wants opportunities that feel closer to real product work and produce tangible artifacts she can confidently discuss during interviews.
-
-Motivations and Goals
-
-Maya wants portfolio projects that are credible and recruiter-friendly. She is not looking for isolated design exercises or simple screen redesigns. Instead, she wants experiences that demonstrate her ability to:
-
-Understand user needs
-Conduct research and synthesize findings
-Define product problems
-Create wireframes and prototypes
-Test and iterate on solutions
-Collaborate with developers and product teammates
-Communicate design decisions clearly
-
-A strong project gives her a complete case study that showcases both process and outcomes. The final result should help her stand out in internship applications and portfolio reviews.
-
-Pain Points
-
-Maya's biggest challenge is building portfolio evidence that feels realistic and professionally relevant.
-
-Lack of Portfolio-Ready Work
-
-Most of her projects come from classes or personal practice. While useful for learning, they often lack the depth and structure expected in internship portfolios.
-
-Unclear Expectations
-
-She is unsure what recruiters value most in a beginner UX portfolio. She does not know how much emphasis should be placed on research, visual design, usability testing, or storytelling.
-
-Limited Real-World Collaboration
-
-Most of her work is completed independently. As a result, she has little experience working with developers, product managers, or other stakeholders.
-
-Difficulty Finding Teammates
-
-She wants to collaborate on meaningful projects but struggles to find committed students who share similar goals.
-
-Lack of Structured Guidance
-
-She understands individual design activities but often lacks a clear framework for moving from research to final case study.
-
-Typical Behaviors
-
-Maya spends time improving her skills through:
-
-Watching UX and product design tutorials
-Practicing in Figma
-Exploring design portfolios online
-Participating in design clubs or communities
-Following designers on LinkedIn and social media
-Completing redesign challenges and personal projects
-Seeking feedback from peers
-
-She is highly motivated but often lacks a structured environment that turns learning into portfolio-ready outcomes.
-
-Tech Comfort
-
-Moderate to high.
-
-Very comfortable with design tools such as Figma, FigJam, Canva, and presentation software. Familiar with basic prototyping, wireframing, and design systems concepts. May have limited coding experience but can collaborate effectively with technical teammates.
-
-Preferred Channels
-
-LinkedIn, Handshake, design clubs, portfolio communities, UX Discord groups, university career centers, employer events, and design-focused networking opportunities.
-
-What She Needs From the Platform
-
-She needs portfolio-focused projects, clear role expectations, structured milestones, and opportunities to collaborate with students from technical and business backgrounds.
-
-Specifically, she benefits from:
-
-UX and product design project tracks
-Defined design roles and responsibilities
-Research and usability-testing templates
-Portfolio and case-study frameworks
-Cross-functional team matching
-Feedback and critique opportunities
-Deliverables that resemble real product work
-
-Most importantly, she needs a process that transforms collaboration into tangible outputs such as research findings, wireframes, prototypes, usability reports, and portfolio-ready case studies.
-
-Recommended Project Tracks and Outputs for Maya
-Project Track	Recommended Final Outputs	Best Internship or Job Mapping
-Mobile app redesign	User research summary, wireframes, high-fidelity prototype, UX case study	UX Design Intern, Product Design Intern
-Product discovery and UX research	Interview findings, personas, journey maps, usability recommendations	UX Research Intern, Product Design Intern
-Campus platform redesign	Information architecture, user flows, prototype, case study	Product Design, UX Design
-Design systems project	Component library, design documentation, implementation recommendations	Design Systems Intern
-Startup product design project	Research synthesis, prototype, usability testing report, presentation deck	Product Design, Startup Design Intern
-Sample Resume Bullets
-Designed a mobile-first product experience by conducting user research, creating wireframes, building a high-fidelity Figma prototype, and incorporating usability feedback into final design recommendations.
-Collaborated with a cross-functional team to redesign a student-facing platform, producing user flows, design systems components, and a portfolio-ready UX case study documenting the end-to-end design process.
-Summary
-
-Maya represents aspiring UI/UX and product designers who are motivated to enter the field but lack strong portfolio evidence. Her biggest challenge is not learning design tools—it is finding realistic projects, structured guidance, and collaborative experiences that translate into recruiter-recognizable work.
-
-For Maya, the platform's value proposition is:
-
-"Create a portfolio-ready case study through real, structured collaboration."
+**Sample resume bullets** - Designed a mobile-first product experience by conducting user research, creating wireframes, building a high-fidelity Figma prototype, and incorporating usability feedback into final design recommendations.  
+- Collaborated with a cross-functional team to redesign a student-facing platform, producing user flows, design systems components, and a portfolio-ready UX case study documenting the end-to-end design process.
