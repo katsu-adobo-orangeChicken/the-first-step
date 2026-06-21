@@ -37,9 +37,9 @@
 **[Epic/Feature 2: How to find the teams]**
 
 * **User Story 3:** 
-  **As a** [role/student type], 
-  **I want to** [action/feature], 
-  **so that** [value/benefit].
+  **As a** student developer who doesn't have much project expereince and fears of being a burden to a more advanced team member, 
+  **I want to** be able to match with team members who are at the same skill level as me through everyone selection of the same structured project track, 
+  **so that** I can collaborate without feeling a sense of imposter syndrome and the worry of a more advanced team member to do all the work for me.
   * *Acceptance Criteria:*
-    * [Criterion 1]
-    * [Criterion 2]
+    * A way to show a whole team experience baseline of each project. Maybe a bar that shows the average of the experience? Or show the individual level of each member in the project.
+    * Ensure that before joining a team then you can see as much information as possible of the team members such as the time of commitment they can give to the project weekly as well as ensuring the appplication process should be as minimal as possible to ensure low friction. No need for a resume to upload just a request to join and maybe if the owner of the project allows it a quick call for interview.
