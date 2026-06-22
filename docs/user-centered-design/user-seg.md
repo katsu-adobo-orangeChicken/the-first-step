@@ -395,21 +395,6 @@ This helps reduce mismatch and imposter syndrome.
 
 ---
 
-## Feature 8: Messaging or Communication Tool
-
-Teams need a way to communicate.
-
-For MVP, this can be simple:
-
-* Direct message
-* Team chat
-* Project comment section
-* Discord or Slack link integration
-
-The simplest MVP version may not need a full chat system. It could allow users to connect through email, Discord, or external links first.
-
----
-
 ## Feature 9: Project Workflow
 
 Once a team starts, the platform should guide them through the project.
