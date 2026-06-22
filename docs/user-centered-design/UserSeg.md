@@ -478,3 +478,5 @@ The platform guides users through the full journey:
 4. Find teammates
 5. Follow a structured workflow
 6. Complete a portfolio-ready outcome
+
+can you see this?
