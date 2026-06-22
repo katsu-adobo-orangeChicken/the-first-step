@@ -139,7 +139,6 @@ He needs career-track-specific projects, explicit role definitions such as Produ
 **Sample resume bullets** - Designed a mobile-first product experience by conducting user research, creating wireframes, building a high-fidelity Figma prototype, and incorporating usability feedback into final design recommendations.  
 - Collaborated with a cross-functional team to redesign a student-facing platform, producing user flows, design systems components, and a portfolio-ready UX case study documenting the end-to-end design process.
 
-# This shit is done
 ## Persona Comparison
 
 | Dimension | Developer/CS | Business/Product | Designer/UX |
