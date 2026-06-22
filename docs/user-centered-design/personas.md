@@ -104,20 +104,6 @@ He needs career-track-specific projects, explicit role definitions such as Produ
 - Built a consulting-style recommendation deck analyzing a campus service market, synthesizing competitor research and survey data into a five-part operating plan presented to stakeholders.
 
 
-## Persona Comparison
-
-| Dimension | Developer/CS | Business/Product | Designer/UX |
-|---|---|---|---|
-| Main hiring proof needed | Shipped technical work | Structured business reasoning and cross-functional decision-making | Portfolio-grade design and research artifacts |
-| Most valuable artifact | GitHub repo, deployed demo, technical write-up | PRD, strategy deck, KPI framework, recommendation memo | Figma case study, research synthesis, usability report |
-| Best internship targets | SWE, engineering practicum, data/ML-adjacent | Consulting, business analyst, product-adjacent, business analytics, APMM | UX design, product design, UX research, design systems |
-| Biggest blocker today | No scoped team project and weak external proof | No clear signal of relevant business experience | No strong portfolio case study |
-| Guidance intensity needed | High on scoping and collaboration | High on career-path translation and deliverables | High on structure from research to case study |
-| Preferred team composition | Wants PM and design partners | Wants technical and design partners | Wants product and engineering partners |
-| Best platform promise | “Build something real” | “Turn interest into recruiter-legible experience” | “Create a portfolio-ready case study” |
-
-The comparison above is a design synthesis grounded in employer expectations for teamwork, problem-solving, technical skill, communication, project ownership, and portfolio-style evidence. 
-
 ### Persona C
 
 **Name:** Maya Hernandez  
@@ -152,3 +138,19 @@ The comparison above is a design synthesis grounded in employer expectations for
 
 **Sample resume bullets** - Designed a mobile-first product experience by conducting user research, creating wireframes, building a high-fidelity Figma prototype, and incorporating usability feedback into final design recommendations.  
 - Collaborated with a cross-functional team to redesign a student-facing platform, producing user flows, design systems components, and a portfolio-ready UX case study documenting the end-to-end design process.
+
+# This shit is done
+## Persona Comparison
+
+| Dimension | Developer/CS | Business/Product | Designer/UX |
+|---|---|---|---|
+| Main hiring proof needed | Shipped technical work | Structured business reasoning and cross-functional decision-making | Portfolio-grade design and research artifacts |
+| Most valuable artifact | GitHub repo, deployed demo, technical write-up | PRD, strategy deck, KPI framework, recommendation memo | Figma case study, research synthesis, usability report |
+| Best internship targets | SWE, engineering practicum, data/ML-adjacent | Consulting, business analyst, product-adjacent, business analytics, APMM | UX design, product design, UX research, design systems |
+| Biggest blocker today | No scoped team project and weak external proof | No clear signal of relevant business experience | No strong portfolio case study |
+| Guidance intensity needed | High on scoping and collaboration | High on career-path translation and deliverables | High on structure from research to case study |
+| Preferred team composition | Wants PM and design partners | Wants technical and design partners | Wants product and engineering partners |
+| Best platform promise | “Build something real” | “Turn interest into recruiter-legible experience” | “Create a portfolio-ready case study” |
+
+The comparison above is a design synthesis grounded in employer expectations for teamwork, problem-solving, technical skill, communication, project ownership, and portfolio-style evidence. 
+
