@@ -1,0 +1,548 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>First Step | Prototype Landing</title>
+  <meta name="description" content="First Step helps early college students gain their first real multidisciplinary team project experience." />
+  <style>
+:root{
+  --bg:#050607;
+  --panel:#101214;
+  --panel2:#16191d;
+  --panel3:#1d2127;
+  --text:#f5f6f7;
+  --muted:#9ca3af;
+  --soft:#d7dce3;
+  --line:rgba(255,255,255,.10);
+  --accent:#d9b86f;
+  --accent2:#f2cf7a;
+  --green:#72d58a;
+  --red:#ef6b74;
+  --radius:22px;
+  --shadow:0 28px 70px rgba(0,0,0,.38);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at 10% 0%, rgba(217,184,111,.12), transparent 28%),
+    radial-gradient(circle at 86% 8%, rgba(130,100,50,.10), transparent 28%),
+    var(--bg);
+  color:var(--text);
+}
+a{text-decoration:none;color:inherit}
+.container{width:min(1180px,calc(100% - 36px));margin:0 auto}
+header{
+  position:sticky;
+  top:0;
+  z-index:30;
+  border-bottom:1px solid var(--line);
+  background:rgba(5,6,7,.82);
+  backdrop-filter:blur(16px);
+}
+.nav{height:72px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.logo{display:flex;align-items:center;gap:10px;font-size:22px;font-weight:850;letter-spacing:-.045em}
+.logo-mark{width:28px;height:24px;position:relative;display:inline-block}
+.logo-mark:before{
+  content:"";
+  position:absolute;inset:0;
+  background:
+    linear-gradient(90deg,transparent 0 38%,var(--accent) 38% 100%) 0 0/100% 33%,
+    linear-gradient(90deg,transparent 0 20%,var(--accent) 20% 82%,transparent 82% 100%) 0 50%/100% 33%,
+    linear-gradient(90deg,var(--accent) 0 62%,transparent 62% 100%) 0 100%/100% 33%;
+  background-repeat:no-repeat;
+}
+.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:24px;color:var(--muted);font-size:14px;font-weight:650}
+.nav-links a:hover{color:var(--text)}
+.button{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  border:1px solid var(--line);
+  background:var(--panel2);
+  color:var(--text);
+  border-radius:999px;
+  padding:12px 18px;
+  font-size:14px;
+  font-weight:800;
+  cursor:pointer;
+}
+.button:hover{border-color:rgba(217,184,111,.35)}
+.button.primary{
+  border-color:rgba(242,207,122,.7);
+  background:linear-gradient(180deg,var(--accent2),var(--accent));
+  color:#111;
+  box-shadow:0 14px 36px rgba(217,184,111,.18);
+}
+.button.small{padding:9px 12px;font-size:12px}
+.hero{padding:72px 0 32px}
+.hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:18px;align-items:stretch}
+.hero-card,.side-card,.panel{
+  border:1px solid var(--line);
+  background:linear-gradient(180deg,rgba(18,20,23,.94),rgba(9,10,12,.96));
+  border-radius:30px;
+  box-shadow:var(--shadow);
+}
+.hero-card{padding:38px;position:relative;overflow:hidden}
+.hero-card:after{
+  content:"";
+  position:absolute;right:-140px;top:-160px;width:360px;height:360px;border-radius:50%;
+  background:radial-gradient(circle,rgba(217,184,111,.14),transparent 66%);
+}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  border:1px solid rgba(217,184,111,.25);
+  background:rgba(217,184,111,.08);
+  color:var(--accent);
+  border-radius:999px;
+  padding:8px 12px;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.02em;
+  margin-bottom:20px;
+}
+h1{margin:0 0 18px;font-size:clamp(42px,6vw,76px);line-height:.96;letter-spacing:-.075em;max-width:820px}
+h1 em{font-style:normal;color:var(--accent)}
+.lead{margin:0 0 26px;color:#c6ccd5;font-size:18px;line-height:1.7;max-width:710px}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px}
+.stat{border:1px solid var(--line);background:rgba(255,255,255,.035);border-radius:18px;padding:15px}
+.stat strong{display:block;font-size:23px;letter-spacing:-.05em}
+.stat span{display:block;color:var(--muted);font-size:12px;margin-top:3px}
+.side-card{padding:22px}
+.side-card h3{margin:0 0 16px;font-size:19px;letter-spacing:-.035em}
+.mini-project{display:grid;grid-template-columns:76px 1fr;gap:12px;align-items:center;border:1px solid var(--line);background:rgba(255,255,255,.035);border-radius:18px;padding:10px;margin-bottom:10px}
+.mini-art{height:74px;border-radius:14px;display:grid;place-items:center;font-size:32px;background:linear-gradient(135deg,#2b2014,#8e5b20)}
+.mini-art.blue{background:linear-gradient(135deg,#122337,#315f9a)}
+.mini-art.purple{background:linear-gradient(135deg,#281636,#9646b5)}
+.mini-project h4{margin:0 0 3px;font-size:15px}
+.mini-project p{margin:0;color:var(--muted);font-size:12px;line-height:1.4}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+.tag{
+  display:inline-flex;align-items:center;
+  border:1px solid var(--line);
+  background:rgba(0,0,0,.28);
+  color:#dce1e7;
+  border-radius:999px;
+  padding:5px 8px;
+  font-size:11px;
+  font-weight:800;
+}
+section{padding:34px 0}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:18px}
+.section-head h2{margin:0;font-size:38px;line-height:1.05;letter-spacing:-.06em}
+.section-head p{margin:8px 0 0;color:var(--muted);max-width:680px;line-height:1.65}
+.feed-panel{border:1px solid var(--line);background:linear-gradient(180deg,#0d0f12,#090a0c);border-radius:30px;padding:22px;box-shadow:var(--shadow)}
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.tabs{display:flex;gap:9px;flex-wrap:wrap}
+.tab{
+  border:1px solid var(--line);
+  background:var(--panel2);
+  color:#dce1e8;
+  border-radius:999px;
+  padding:10px 14px;
+  font-size:13px;
+  font-weight:850;
+  cursor:pointer;
+}
+.tab.active,.tab:hover{border-color:rgba(217,184,111,.38);color:var(--accent);background:rgba(217,184,111,.08)}
+.search{
+  min-width:260px;
+  max-width:380px;
+  flex:1;
+  border:1px solid var(--line);
+  background:var(--panel2);
+  color:var(--muted);
+  border-radius:999px;
+  padding:11px 14px;
+  font-size:14px;
+}
+.project-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.project-card{
+  border:1px solid var(--line);
+  background:var(--panel);
+  border-radius:20px;
+  overflow:hidden;
+  transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease;
+}
+.project-card:hover{transform:translateY(-4px);border-color:rgba(217,184,111,.36);box-shadow:0 20px 42px rgba(0,0,0,.28)}
+.thumb{
+  aspect-ratio:1/1;
+  position:relative;
+  display:flex;
+  align-items:flex-end;
+  padding:12px;
+  overflow:hidden;
+  background:linear-gradient(135deg,#2d2115,#89591e);
+}
+.thumb:before{
+  content:attr(data-icon);
+  position:absolute;inset:0;display:grid;place-items:center;font-size:58px;
+  filter:drop-shadow(0 14px 24px rgba(0,0,0,.3));
+}
+.thumb:after{
+  content:"";
+  position:absolute;inset:0;
+  background:
+    radial-gradient(circle at 18% 18%,rgba(255,255,255,.18),transparent 26%),
+    linear-gradient(180deg,transparent 52%,rgba(0,0,0,.44));
+}
+.thumb.blue{background:linear-gradient(135deg,#122337,#3267a8)}
+.thumb.purple{background:linear-gradient(135deg,#281638,#984db8)}
+.thumb.green{background:linear-gradient(135deg,#10281f,#2d946d)}
+.thumb.red{background:linear-gradient(135deg,#32141c,#b94b55)}
+.thumb.gray{background:linear-gradient(135deg,#20242a,#626b78)}
+.thumb.orange{background:linear-gradient(135deg,#33200f,#c87921)}
+.role-pill{
+  position:relative;z-index:1;
+  border:1px solid rgba(255,255,255,.16);
+  background:rgba(0,0,0,.45);
+  backdrop-filter:blur(10px);
+  color:#fff;
+  border-radius:999px;
+  padding:6px 9px;
+  font-size:11px;
+  font-weight:900;
+}
+.project-body{padding:14px}
+.project-title{margin:0 0 6px;font-size:16px;line-height:1.25;letter-spacing:-.035em;min-height:40px}
+.project-desc{margin:0 0 12px;color:var(--muted);font-size:12px;line-height:1.45;min-height:52px}
+.project-meta{display:flex;gap:8px;justify-content:space-between;color:#d3d8df;font-size:11px}
+.project-meta span{display:inline-flex;align-items:center;gap:4px}
+.difficulty.easy{color:var(--green)}
+.difficulty.medium{color:var(--accent)}
+.difficulty.hard{color:var(--red)}
+.flow-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.flow-card{border:1px solid var(--line);background:var(--panel);border-radius:22px;padding:20px;min-height:168px}
+.num{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:rgba(217,184,111,.11);color:var(--accent);font-weight:950;margin-bottom:14px}
+.flow-card h3{margin:0 0 8px;font-size:18px;letter-spacing:-.03em}
+.flow-card p{margin:0;color:var(--muted);font-size:13px;line-height:1.55}
+.detail-layout{display:grid;grid-template-columns:1fr 340px;gap:18px}
+.detail-card{border:1px solid var(--line);background:linear-gradient(180deg,var(--panel),#0d0f11);border-radius:26px;padding:24px}
+.detail-card h2,.detail-card h3{margin:0 0 10px;letter-spacing:-.04em}
+.detail-card p{color:var(--muted);line-height:1.65}
+.info-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:18px}
+.info{border:1px solid var(--line);background:rgba(255,255,255,.035);border-radius:16px;padding:12px}
+.info small{display:block;color:var(--muted);font-size:11px;text-transform:uppercase;font-weight:850}
+.info strong{display:block;margin-top:4px;font-size:14px}
+.form-field{display:block;margin-bottom:12px}
+.form-field span{display:block;font-size:13px;font-weight:850;margin-bottom:7px}
+.input,select,textarea{
+  width:100%;
+  border:1px solid var(--line);
+  background:var(--panel2);
+  color:var(--text);
+  border-radius:14px;
+  padding:12px 13px;
+  font:inherit;
+  font-size:14px;
+}
+textarea{min-height:88px;resize:vertical}
+.milestones{display:grid;gap:12px}
+.milestone{border:1px solid var(--line);background:rgba(255,255,255,.035);border-radius:18px;padding:16px;display:grid;grid-template-columns:60px 1fr;gap:14px}
+.week{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:rgba(217,184,111,.12);color:var(--accent);font-weight:950}
+.milestone h3{margin:0 0 4px;font-size:17px}
+.milestone p{margin:0;color:var(--muted);font-size:13px}
+.asset-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.asset{border:1px solid var(--line);background:rgba(255,255,255,.035);border-radius:18px;padding:16px}
+.asset-icon{font-size:26px;margin-bottom:8px}
+.asset strong{display:block}
+.asset span{display:block;color:var(--muted);font-size:13px;line-height:1.45;margin-top:4px}
+.workspace{display:grid;grid-template-columns:300px 1fr;gap:18px}
+.sidebar{border:1px solid var(--line);background:var(--panel);border-radius:26px;padding:20px;height:max-content;position:sticky;top:92px}
+.sidebar h3{margin:0 0 10px}
+.sidebar-item{border-top:1px solid var(--line);padding:13px 0;color:var(--muted);font-size:14px}
+.checklist{display:grid;gap:14px}
+.check-card{border:1px solid var(--line);background:var(--panel);border-radius:24px;padding:20px}
+.check-item{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);background:rgba(255,255,255,.035);border-radius:14px;padding:12px;margin-top:9px}
+.check-item input{margin-top:3px}
+footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:13px;margin-top:40px}
+@media(max-width:1050px){
+  .project-grid{grid-template-columns:repeat(3,1fr)}
+  .hero-grid,.detail-layout,.workspace{grid-template-columns:1fr}
+  .sidebar{position:static}
+}
+@media(max-width:760px){
+  .nav-links{display:none}
+  .hero{padding:48px 0 20px}
+  .hero-card,.side-card,.feed-panel{border-radius:24px;padding:22px}
+  .hero-stats,.flow-grid,.project-grid,.info-grid,.asset-grid{grid-template-columns:1fr}
+  .section-head{display:block}
+  h1{font-size:42px}
+  .section-head h2{font-size:32px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <nav class="nav">
+      <a class="logo" href="index.html"><span class="logo-mark"></span>The First <span>Step</span></a>
+      <div class="nav-links">
+        <a href="index.html#survey">Survey</a>
+        <a href="projects.html">Projects</a>
+        <a href="track-detail.html">Detail</a>
+        <a href="checklist-workspace.html">Workspace</a>
+      </div>
+      <a class="button small" href="index.html#survey">Start</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-card">
+        <div class="eyebrow">First real project experience</div>
+        <h1>Find your first <em>real project</em> before your first internship.</h1>
+        <p class="lead">
+          First Step helps freshman, sophomore, and junior students choose a role track, browse beginner-friendly projects, understand what to do, and request to join a team.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#survey">Start survey</a>
+          <a class="button" href="projects.html">Browse projects</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><strong>3 tracks</strong><span>Engineer, Designer, Business</span></div>
+          <div class="stat"><strong>12 cards</strong><span>Roblox-style project browsing</span></div>
+          <div class="stat"><strong>4 weeks</strong><span>Structured milestone flow</span></div>
+        </div>
+      </div>
+
+      <aside class="side-card">
+        <h3>Popular starter projects</h3>
+        <a class="mini-project" href="track-detail.html">
+          <div class="mini-art">💻</div>
+          <div><h4>Campus Web App</h4><p>Build a student-facing campus utility.</p><div class="tags"><span class="tag">Engineer</span><span class="tag">4–5 weeks</span></div></div>
+        </a>
+        <a class="mini-project" href="track-detail.html">
+          <div class="mini-art blue">🎨</div>
+          <div><h4>UX Redesign Sprint</h4><p>Turn research into a portfolio case study.</p><div class="tags"><span class="tag">Designer</span><span class="tag">Easy</span></div></div>
+        </a>
+        <a class="mini-project" href="track-detail.html">
+          <div class="mini-art purple">📈</div>
+          <div><h4>Growth Campaign Plan</h4><p>Create a launch and acquisition strategy.</p><div class="tags"><span class="tag">Business</span><span class="tag">Deck-ready</span></div></div>
+        </a>
+      </aside>
+    </div>
+  </section>
+
+  <section id="flow">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>Simple MVP flow</h2>
+          <p>Keep the first version focused: survey, recommendation, project browsing, detail review, interest form, and milestone checklist.</p>
+        </div>
+      </div>
+      <div class="flow-grid">
+        <div class="flow-card"><div class="num">1</div><h3>Survey</h3><p>Collect role track, school year, major, experience level, and availability.</p></div>
+        <div class="flow-card"><div class="num">2</div><h3>Project feed</h3><p>Show a curated Roblox-style grid of project cards that students can scan quickly.</p></div>
+        <div class="flow-card"><div class="num">3</div><h3>Detail page</h3><p>Explain goal, roles, difficulty, timeline, final output, and weekly milestones.</p></div>
+        <div class="flow-card"><div class="num">4</div><h3>Request to join</h3><p>Capture interest and use manual matching behind the scenes.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="survey">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>Onboarding survey gate</h2>
+          <p>The prototype routes students to a project discovery feed based on their role intent.</p>
+        </div>
+      </div>
+
+      <div class="panel" style="padding:24px">
+        <form id="track-routing-form">
+          <div class="info-grid">
+            <label class="form-field">
+              <span>Target Role Track</span>
+              <select id="target-role-track" required>
+                <option value="">Select your role track</option>
+                <option value="engineer">Developer / Software Engineer</option>
+                <option value="designer">UI/UX Designer</option>
+                <option value="business">Business / Product / Marketing</option>
+              </select>
+            </label>
+            <label class="form-field">
+              <span>School Year</span>
+              <select><option>Freshman</option><option>Sophomore</option><option>Junior</option></select>
+            </label>
+            <label class="form-field">
+              <span>Major / Field</span>
+              <input class="input" placeholder="Computer Science, HCI, Business Economics" />
+            </label>
+            <label class="form-field">
+              <span>Experience Level</span>
+              <select><option>No project experience</option><option>Some class or club experience</option><option>Started projects but did not finish</option></select>
+            </label>
+            <label class="form-field">
+              <span>Weekly Availability</span>
+              <select><option>3–5 hours per week</option><option>6–8 hours per week</option><option>9+ hours per week</option></select>
+            </label>
+            <label class="form-field">
+              <span>What do you want?</span>
+              <select><option>Build portfolio proof</option><option>Prepare for internship</option><option>Explore career direction</option></select>
+            </label>
+          </div>
+          <div style="margin-top:16px">
+            <button class="button primary" type="submit">Continue to discovery</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>Project preview</h2>
+          <p>A small taste of the project discovery feed. The full page looks more like a browseable project catalog.</p>
+        </div>
+        <a class="button" href="projects.html">View all projects</a>
+      </div>
+      <div class="feed-panel">
+        <div class="project-grid">
+          
+          <a class="project-card" data-role="engineer" href="track-detail.html?project=web-app-/-campus-tool">
+            <div class="thumb" data-icon="💻">
+              <span class="role-pill">Engineer</span>
+            </div>
+            <div class="project-body">
+              <h3 class="project-title">Web App / Campus Tool</h3>
+              <p class="project-desc">Build a simple product that solves a real student problem on campus.</p>
+              <div class="project-meta">
+                <span>👥 267 interested</span>
+                <span>⏱ 4–5 weeks</span>
+                <span class="difficulty medium">▮ Medium</span>
+              </div>
+            </div>
+          </a>
+
+          <a class="project-card" data-role="engineer" href="track-detail.html?project=student-data-dashboard">
+            <div class="thumb blue" data-icon="📊">
+              <span class="role-pill">Engineer</span>
+            </div>
+            <div class="project-body">
+              <h3 class="project-title">Student Data Dashboard</h3>
+              <p class="project-desc">Visualize useful student or campus data and explain insights clearly.</p>
+              <div class="project-meta">
+                <span>👥 274 interested</span>
+                <span>⏱ 3–4 weeks</span>
+                <span class="difficulty easy">▮ Easy</span>
+              </div>
+            </div>
+          </a>
+
+          <a class="project-card" data-role="designer" href="track-detail.html?project=ux-redesign-sprint">
+            <div class="thumb purple" data-icon="🎨">
+              <span class="role-pill">Designer</span>
+            </div>
+            <div class="project-body">
+              <h3 class="project-title">UX Redesign Sprint</h3>
+              <p class="project-desc">Research a product flow, redesign it, and package a clean case study.</p>
+              <div class="project-meta">
+                <span>👥 246 interested</span>
+                <span>⏱ 4 weeks</span>
+                <span class="difficulty easy">▮ Easy</span>
+              </div>
+            </div>
+          </a>
+
+          <a class="project-card" data-role="product" href="track-detail.html?project=product-discovery-sprint">
+            <div class="thumb green" data-icon="🧩">
+              <span class="role-pill">Product</span>
+            </div>
+            <div class="project-body">
+              <h3 class="project-title">Product Discovery Sprint</h3>
+              <p class="project-desc">Identify a user problem, define the opportunity, and map the solution.</p>
+              <div class="project-meta">
+                <span>👥 288 interested</span>
+                <span>⏱ 2–3 weeks</span>
+                <span class="difficulty easy">▮ Easy</span>
+              </div>
+            </div>
+          </a>
+
+          <a class="project-card" data-role="business" href="track-detail.html?project=growth-campaign-plan">
+            <div class="thumb red" data-icon="📣">
+              <span class="role-pill">Business</span>
+            </div>
+            <div class="project-body">
+              <h3 class="project-title">Growth Campaign Plan</h3>
+              <p class="project-desc">Create a go-to-market plan, test messaging, and define launch KPIs.</p>
+              <div class="project-meta">
+                <span>👥 260 interested</span>
+                <span>⏱ 3–4 weeks</span>
+                <span class="difficulty medium">▮ Medium</span>
+              </div>
+            </div>
+          </a>
+
+          <a class="project-card" data-role="business" href="track-detail.html?project=consulting-strategy-project">
+            <div class="thumb gray" data-icon="📈">
+              <span class="role-pill">Business</span>
+            </div>
+            <div class="project-body">
+              <h3 class="project-title">Consulting Strategy Project</h3>
+              <p class="project-desc">Analyze a market, compare competitors, and create a recommendation deck.</p>
+              <div class="project-meta">
+                <span>👥 309 interested</span>
+                <span>⏱ 4–5 weeks</span>
+                <span class="difficulty medium">▮ Medium</span>
+              </div>
+            </div>
+          </a>
+
+          <a class="project-card" data-role="engineer" href="track-detail.html?project=api-builder-project">
+            <div class="thumb blue" data-icon="⚙️">
+              <span class="role-pill">Engineer</span>
+            </div>
+            <div class="project-body">
+              <h3 class="project-title">API Builder Project</h3>
+              <p class="project-desc">Design a small REST API with docs, data models, and demo endpoints.</p>
+              <div class="project-meta">
+                <span>👥 253 interested</span>
+                <span>⏱ 3–4 weeks</span>
+                <span class="difficulty medium">▮ Medium</span>
+              </div>
+            </div>
+          </a>
+
+          <a class="project-card" data-role="engineer" href="track-detail.html?project=ai-feature-prototype">
+            <div class="thumb purple" data-icon="🧠">
+              <span class="role-pill">Engineer</span>
+            </div>
+            <div class="project-body">
+              <h3 class="project-title">AI Feature Prototype</h3>
+              <p class="project-desc">Prototype an AI-powered feature for a realistic student use case.</p>
+              <div class="project-meta">
+                <span>👥 260 interested</span>
+                <span>⏱ 4–5 weeks</span>
+                <span class="difficulty hard">▮ Hard</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer><div class="container">First Step — simple MVP prototype with Roblox-style project discovery.</div></footer>
+<script>
+  document.getElementById("track-routing-form").addEventListener("submit", function(event) {
+    event.preventDefault();
+    const selectedTrack = document.getElementById("target-role-track").value;
+    if (selectedTrack) {
+      window.location.href = "projects.html?track=" + selectedTrack;
+    }
+  });
+</script>
+</body>
+</html>
