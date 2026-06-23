@@ -528,8 +528,8 @@ This is the version for testing the idea with users, maybe even manually behind 
   * Business/Product/Marketing
 
 ### 3. Team Formation & Execution
-* **Join Interest / Application Form:** Not real matching yet. Just an “I’m interested” CTA capturing chosen role, availability, and contact info.
-* **Manual Team Formation:** Match students manually using a spreadsheet or admin background process.
+* **Compatibility RSVP:** A low-stakes check-in capturing role preferences, availability, and contact info—designed to feel like a quick setup rather than a job application.
+* **Algorithmic Matchmaking Queue:** An automated background process that pools active RSVPs and groups students into teams of 3–4 once scheduling and role criteria are met, removing the manual admin bottleneck.
 * **Weekly Milestone Checklist:** A static or semi-static checklist for 4-5 weeks. The key is structure, not automation.
 
 ### 4. Project Closure
