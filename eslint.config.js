@@ -9,7 +9,9 @@ export default [
     ignores: [
       "node_modules/",
       "docs/",
-      ".github/"
+      ".github/",
+      "dist/",
+      "prototype/syrena-prototype/dist/"
     ]
   },
   // Global linting rules for future JavaScript
