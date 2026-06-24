@@ -5,6 +5,9 @@
   "type": "module",
   "description": "A beginner-first project matching platform.",
   "scripts": {
+    "dev": "vite prototype/syrena-prototype --config prototype/syrena-prototype/vite.config.js",
+    "build": "vite build prototype/syrena-prototype --config prototype/syrena-prototype/vite.config.js",
+    "preview": "vite preview prototype/syrena-prototype --config prototype/syrena-prototype/vite.config.js",
     "lint:js": "eslint ."
   },
   "repository": {
@@ -18,8 +21,17 @@
   "homepage": "https://github.com/katsu-adobo-orangeChicken/the-first-step#readme",
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@tailwindcss/vite": "^4.3.1",
+    "@vitejs/plugin-react": "^6.0.3",
     "eslint": "^10.5.0",
     "eslint-plugin-jsdoc": "^63.0.2",
-    "globals": "^17.6.0"
+    "globals": "^17.6.0",
+    "tailwindcss": "^4.3.1",
+    "vite": "^8.1.0"
+  },
+  "dependencies": {
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "react-router-dom": "^7.18.0"
   }
 }
