@@ -5,135 +5,158 @@
 
 ## Persona A: Sophie Kim (The Engineering Track)
 
-### [Epic 1: Structured Scope Discovery & Domain Specificity]
+### [Epic 1: Onboarding and Career Direction]
+* #### User Story 1: Engineering Path Alignment
+    * **As an** aspiring software engineering intern looking to escape tutorial hell,
+    * **I want to** enter my major, technical interests, and experience level during onboarding,
+    * **So that** the platform recommends structured coding project tracks that match my career goals.
+    * *Acceptance Criteria:*
+        * Survey captures baseline technical inputs: Major (e.g., Computer Science), target engineering role, and current familiarity with basic tools (e.g., Git, Python).
+        * Upon submission, routes the user to a filtered view of the project discovery feed highlighting developer slots.
 
-*   #### User Story 1: Target-Company Aligned Tracking
-    *   **As a** sophomore computer science student looking to escape tutorial hell and build a targeted portfolio,
+### [Epic 2: Project Discovery]
+* #### User Story 2: Bounded Engineering Project Selection
+    * **As a** beginner developer who experiences blank-page anxiety,
+    * **I want to** browse basic coding project cards showing open roles, difficulty levels, and explicit technical final outputs,
+    * **So that** I can choose a realistic project track without feeling underqualified or intimidated.
+    * *Acceptance Criteria:*
+        * Each card displays: Title, difficulty tier, open engineering seats, and clear final outputs (e.g., Deployed Web App, API backend).
 
-    *   **I want to** filter the project discovery feed by specialized domain types and company-aligned track badges,
+### [Epic 3: Role Clarity]
+* #### User Story 3: Weekly Code Implementation Tasks
+    * **As a** developer teammate on a project track,
+    * **I want to** view a clear weekly checklist of my role's exact coding tasks,
+    * **So that** I know exactly what to build and avoid overlapping with design or marketing roles.
+    * *Acceptance Criteria:*
+        * The project view breaks down Week 1 through Week 5 into separate tab views.
+        * Selecting a week displays a dedicated, plain-text task list bounded strictly to engineering contributions.
 
-    *   **So that** I can complete a structured technical pathway that matches the exact engineering competencies recruiters look for at my target companies.
+### [Epic 4: Team Formation]
+* #### User Story 4: Joining an Interdisciplinary Team
+    * **As a** student developer with minimal real-world deployment experience,
+    * **I want to** see an open team's current members, open seats, and compatible commitments,
+    * **So that** I can apply to join a balanced team with a single click.
+    * *Acceptance Criteria:*
+        * Roster displays member profiles highlighting major, verified institutional email (.edu status), and weekly available hours.
+        * Clicking "Request to Join" enters the user into an ultra-low-friction applicant queue without requiring corporate-style resume uploads.
 
-    *   *Acceptance Criteria:*
-        *   The onboarding preference survey maps target internship job families (e.g., Software Engineering Intern, Engineering Practicum, Data/ML-adjacent role) to dynamically recommend project tracks.
-        *   The project discovery screen features a drop-down menu and sidebar to filter by specialization categories (e.g., Full-Stack Campus Tool, Data Dashboard, API/Backend Reliability, AI Feature Prototype).
-        *   Each project card renders a company-aligned track badge (e.g., "Practicum-Aligned Track") indicating at a glance that the repo involves industry-standard constraints like testing suites or cloud infrastructure logs.
+### [Epic 5: Guided Project Execution]
+* #### User Story 5: Repository & Code Progress Tracking
+    * **As a** developer teammate pushing toward a finished build,
+    * **I want to** submit my weekly code repository links into our team's milestone checklist,
+    * **So that** our group can visually track our progress and ensure the application deploys on time.
+    * *Acceptance Criteria:*
+        * The weekly tracking interface includes an active plain-text link input box specifically for repository/code submissions.
 
-*   #### User Story 2: Scope Blueprinting vs. Blank-Page Anxiety
-    *   **As a** beginner developer who experiences freezing and anxiety when facing an ambiguous, blank code editor without a video guide,
-
-    *   **I want to** inspect an explicit project track roadmap alongside a side-by-side Skills Balance Dashboard before joining,
-
-    *   **So that** I can confidently verify that the technical feature scope is tightly bounded, beginner-friendly, and manageable.
-
-    *   *Acceptance Criteria:*
-        *   Clicking "View Project" opens an interactive 5-week tracking timeline detailing exact, chronological milestone requirements.
-        *   The track preview explicitly inventory-locks the final non-negotiable team outputs (e.g., Deployed App Link, active Git contribution stream, documented README) needed for project completion.
-        *   Renders a highly scannable **Skills Balance Dashboard** grouping requirements into: (1) *Baseline Concepts Needed* (e.g., Git syntax, basic script logic) and (2) *Industry Competencies to Learn* (e.g., REST API handling, CI/CD parsing).
-        *   Displays detailed cross-functional role boundaries showing exact engineering features separated cleanly from design and strategy scopes to eliminate implementation overlap.
-
-### [Epic 2: Imposter-Free Team Matching]
-
-*   #### User Story 3: Skill-Balanced Teaming
-    *   **As a** student programmer with minimal real-world deployment experience who fears being an anchor to advanced peers,
-
-    *   **I want to** match onto structured tracks exclusively with students logging a similar baseline experience layer,
-
-    *   **So that** I can collaborate in an error-safe workspace without feeling intense imposter syndrome or letting a power user write all my code for me.
-
-    *   *Acceptance Criteria:*
-        *   The team composition dashboard calculates and surfaces an aggregated project experience baseline bar or individual student track level flags.
-        *   Before requesting entry, users can cleanly inspect an open team’s profile data, including major, school email verification, and weekly hourly availability.
-        *   The interface establishes an ultra-low-friction queue entry loop—requesting entry takes one click, bypassing corporate-style resume uploads while supporting a quick call interface if requested by the track owner.
+### [Epic 6: Career Output]
+* #### User Story 6: Engineering Resume Story Packaging
+    * **As a** developer who has completed a full project track,
+    * **I want** examples of technical resume bullets and interview talking points tailored to my engineering contributions,
+    * **So that** I can confidently prove my real-world team experience to tech recruiters.
+    * *Acceptance Criteria:*
+        * Marking the project 100% complete unlocks a "Portfolio Wrap-Up" screen containing sample bullets using action verbs (e.g., "Built," "Deployed") and STAR framework structures.
 
 ---
 
 ## Persona B: Daniel Brooks (The Business & Strategy Track)
 
-### [Epic 1: Strategic Launch Sprints & Framework Delivery]
+### [Epic 1: Onboarding and Career Direction]
+* #### User Story 1: Business Path Alignment
+    * **As a** business student targeting analyst or consulting roles,
+    * **I want to** select my business focus and target industry during onboarding,
+    * **So that** the platform directs me toward projects requiring strategic, non-coding deliverables.
+    * *Acceptance Criteria:*
+        * Onboarding survey captures business-oriented inputs: Major (e.g., Business Economics), target career track (e.g., Consulting, Marketing, Product Management), and strategic goals.
 
-*   #### User Story 1: Cross-Functional "Launch Sprint" Filtering
-    *   **As a** Business Economics and Information Systems student targeting consulting, business analyst, or strategy pathways,
+### [Epic 2: Project Discovery]
+* #### User Story 2: Non-Code "Launch Sprint" Filtering
+    * **As a** business student looking for practical team experience,
+    * **I want to** filter the project discovery feed for tracks seeking a Business Analyst, Strategy, or Marketing Lead,
+    * **So that** I can easily find teams focused on launching market-viable product concepts.
+    * *Acceptance Criteria:*
+        * The discovery hub features an active filter category for "Business / Marketer" roles, screening out code-exclusive refactoring projects.
 
-    *   **I want to** filter the discovery engine for cross-functional "Launch Sprints" seeking a Business or Strategy Lead rather than scrolling past technical code languages,
+### [Epic 3: Role Clarity]
+* #### User Story 3: Weekly Strategic Task Tracking
+    * **As a** Strategy Lead managing cross-functional milestones for the first time,
+    * **I want to** see a weekly plain-text checklist of my required business deliverables,
+    * **So that** I can guide my technical peers and organize our product scope without losing momentum.
+    * *Acceptance Criteria:*
+        * The week-by-week timeline isolates business, marketing, and market research tasks into their own clear checklists.
 
-    *   **So that** I can quickly locate high-agency teams focused on launching market-viable product concepts where I can execute business analyst deliverables.
-    *   *Acceptance Criteria:*
-        *   The discovery hub features an active toggle for "Launch Sprints" that filters out code-exclusive refactoring projects.
-        *   The feed actively highlights tracks with empty *Business Analyst / Strategy Lead* or *Growth / Marketing Lead* seats, filtering out pure, generic "Product Manager" roles to ensure all business seats have distinct, non-overlapping execution assignments.
+### [Epic 4: Team Formation]
+* #### User Story 4: Managing Team Entry Requests
+    * **As a** Strategy Lead assembling a balanced launch team,
+    * **I want to** review applicant profile details and approve or decline incoming requests directly from a simple queue,
+    * **So that** I can quickly secure committed, cross-functional partners.
+    * *Acceptance Criteria:*
+        * The track owner dashboard renders incoming applicant details (verified status, major, stated weekly availability).
+        * Features a basic Accept/Decline button pair that instantly updates the team roster.
 
-*   #### User Story 2: Embedded Deliverable Scaffolding
-    *   **As a** business student managing cross-functional milestones and agile team loops for the first time,
+### [Epic 5: Guided Project Execution]
+* #### User Story 5: Document-Based Milestone Submissions
+    * **As a** non-coding team member whose primary contributions are analytical,
+    * **I want to** submit my strategic framework and document links directly into our milestone checkpoints,
+    * **So that** my business assets are tracked as core requirements alongside the code repository.
+    * *Acceptance Criteria:*
+        * The execution timeline treats document links (e.g., Shared Doc Link, Presentation Slides Link) as valid milestone submission types.
 
-    *   **I want to** leverage pre-formatted deliverable markdown templates and user-centered design tooltips directly inside our workspace,
-
-    *   **So that** I can structure our product requirements and guide my technical peers without having to invent business documentation from scratch.
-
-    *   *Acceptance Criteria:*
-        *   Claiming a Business or Strategy seat automatically populates the team’s document hub with pre-formatted markdown frameworks (e.g., Product Requirements Document (PRD) skeletons, consulting issue-trees, go-to-market briefs).
-        *   The document editor features interactive User-Centered Design tooltips and calculator widgets to guide students smoothly through competitor indexing and baseline product metric calculations.
-
-### [Epic 2: Strategic Accountability & Non-Code Proof]
-
-*   #### User Story 3: Overhead-Free Team Assembly
-    *   **As a** Strategy Lead trying to coordinate a reliable team under compressed launch deadlines,
-
-    *   **I want a** central applicant manager dashboard that aggregates applicant availability and skill goals,
-
-    *   **So that** I can quickly review, approve, and lock down a highly committed team without tedious recruiting process overhead.
-
-    *   *Acceptance Criteria:*
-        *   The track owner's dashboard renders a single view of incoming applicant profiles showing verified institutional status (.edu), major, weekly hour commitments, and stated project goals.
-        *   Establishes a dual-action interface (Accept/Decline buttons) that instantly updates the team roster and locks down tracking board assignments.
-
-*   #### User Story 4: Verified Legible Business Artifacts
-    *   **As a** non-coding team member whose primary contributions are analytical, document-based, and strategic,
-
-    *   **I want to** upload my business deliverables directly into the project milestone tracking board as core platform requirements,
-
-    *   **So that** my strategic assets are verified and clearly visible to corporate or consulting recruiters without requiring Git commits.
-    *   *Acceptance Criteria:*
-        *   The 5-week tracking pipeline integrates hard, document-based deliverable checks (e.g., "Link Active PRD", "Upload Consulting Case Deck Link") as non-negotiable gateway requirements.
-        *   The public-facing, shareable project portfolio landing page embeds the Strategy Lead's documents prominently, positioning his profile and execution summary as an equal primary deliverable alongside the code repository analytics.
+### [Epic 6: Career Output]
+* #### User Story 6: Legible Business Artifact Presentation
+    * **As a** business analyst teammate whose contributions are document-based,
+    * **I want** my strategic assets to be featured prominently on the final project wrap-up summary,
+    * **So that** my analytical reasoning and cross-functional ownership are immediately legible to corporate or consulting recruiters.
+    * *Acceptance Criteria:*
+        * The project wrap-up view embeds links to completed strategic documents prominently alongside profile details, providing direct sample resume text tailored to business paths.
 
 ---
 
-## Persona C: Maya Hernandez (The UX/UI Design Track)
+## Persona C: Maya Hernandez (The UI/UX Design Track)
 
-### [Epic 1: Design-Driven Team Sourcing & Engineering Handoff]
+### [Epic 1: Onboarding and Career Direction]
+* #### User Story 1: Design Path Alignment
+    * **As a** creative design or cognitive science student,
+    * **I want to** specify my design focus (e.g., UI/UX, user research) and portfolio needs during onboarding,
+    * **So that** the platform surfaces tracks requiring dedicated user experience assets.
+    * *Acceptance Criteria:*
+        * Survey captures design-focused metrics: Major (e.g., Cognitive Science/HCI), layout medium preferences (Web, Mobile), and portfolio goals.
 
-*   #### User Story 1: Interface Deficit Sourcing
-    *   **As a** design and human-computer interaction (HCI) student building a high-fidelity case study,
+### [Epic 2: Project Discovery]
+* #### User Story 2: Sourcing Developer-Heavy Teams
+    * **As a** designer building a high-fidelity portfolio case study,
+    * **I want to** filter the project discovery feed for active, developer-heavy teams missing a UX/UI Designer,
+    * **So that** I can partner with engineers who are ready to transform my layouts into a live, deployed app.
+    * *Acceptance Criteria:*
+        * Features a one-click toggle labeled: "Show Teams Needing a Designer" that restricts the feed to groups with confirmed developers but open design seats.
 
-    *   **I want to** toggle the project feed to instantly see active, developer-heavy teams missing a UX/UI Designer,
+### [Epic 3: Role Clarity]
+* #### User Story 3: Design-Specific Weekly Checklists
+    * **As a** student designer trying to balance user research and visual assets,
+    * **I want to** inspect my role's exact weekly task breakdowns across the 5-week project timeline,
+    * **So that** I can manage my timeline from initial wireframes to final layout handoffs safely.
+    * *Acceptance Criteria:*
+        * The weekly task breakdown maps design milestones chronologically (e.g., Week 2 user flows, Week 3 mockups).
 
-    *   **So that** I can embed with technically ready engineers capable of transforming my Figma user research into an active, deployed application.
+### [Epic 4: Team Formation]
+* #### User Story 4: Simple Designer-to-Team Assembly
+    * **As a** designer seeking cross-functional partners,
+    * **I want to** apply to open teams with compatible schedules,
+    * **So that** I can collaborate with committed students from technical and business backgrounds.
+    * *Acceptance Criteria:*
+        * Maya can select open slots on balanced team cards and submit an instantaneous request to join, viewing verified school details for all existing members.
 
-    *   *Acceptance Criteria:*
-        *   The platform discovery page provides a one-click toggle labeled: "Show Teams Needing a Designer".
-        *   Surfaces only teams that have already fulfilled their baseline developer minimums but lack user experience support.
-        *   Each matching card prominently specifies the platform medium (e.g., Mobile App Redesign, Campus Web App, Startup Validation Prototype) so Maya can choose her target layout environment.
+### [Epic 5: Guided Project Execution]
+* #### User Story 5: Streamlined Prototype Link Handoff
+    * **As a** student designer performing a cross-functional handoff,
+    * **I want to** submit my interactive design file links directly into the milestone tracking board,
+    * **So that** developers can instantly look up layout dimensions and parameters.
+    * *Acceptance Criteria:*
+        * The milestone dashboard features a design link input field. Submitting a link marks the design task complete and provides a clear point-of-reference for engineering implementation.
 
-*   #### User Story 2: Cross-Functional Engineering Handoff
-    *   **As a** student designer trying to practice realistic product handoff loops,
-
-    *   **I want an** integrated workspace module where I can embed interactive Figma files right next to development tasks,
-
-    *   **So that** I can execute clean design handoffs and ensure developers code directly from accurate asset layout parameters.
-
-    *   *Acceptance Criteria:*
-        *   The project dashboard contains a dedicated "Design Hub" page that seamlessly authenticates and displays live, interactive Figma canvas embeds.
-        *   The agile task board includes a dedicated status trigger labeled "UI Assets Locked / Ready for Handoff" that pushes an automated system alert to the developers (Sophie) to freeze changes and begin asset-dimension implementation.
-
-### [Epic 2: Case Study Packaging & Storytelling Automation]
-
-*   #### User Story 3: Chronological Case Study Compilation
-    *   **As a** UX designer whose primary evaluation signal for internships is an end-to-end process case study,
-
-    *   **I want the system to** automatically compile my research assets, wireframe histories, and user testing reviews into a clean markdown framework,
-
-    *   **So that** I can instantly export a perfectly structured product story onto external portfolio builders like Webflow, Squarespace, or Notion.
-    
-    *   *Acceptance Criteria:*
-        *   Reaching Week 5 activates an automated "Generate Portfolio Shell" utility for the Designer profile slot.
-        *   The utility exports clean, chronological markdown code explicitly structuring: (1) The Core User Problem, (2) Competitor Research Logs, (3) Wireframe Evolution Trees, (4) Usability Feedback Adjustments, and (5) A permanent, shareable hyperlink to the final team-deployed web or mobile build.
+### [Epic 6: Career Output]
+* #### User Story 6: Case Study Process Structuring Guide
+    * **As a** UX designer whose primary evaluation signal for internships is an end-to-end process case study,
+    * **I want** a post-project guide that maps my chronological research steps, wireframe iterations, and final build links,
+    * **So that** I have a clear outline ready to build into my personal portfolio site.
+    * *Acceptance Criteria:*
+        * Completing the track unlocks a specialized "Case Study Structuring Package" text view, prompting and sorting design process sections: (1) Core User Problem, (2) Competitor Research Logs, (3) Wireframe Evolution, and (4) Usability Feedback Results.

@@ -479,4 +479,65 @@ The platform guides users through the full journey:
 5. Follow a structured workflow
 6. Complete a portfolio-ready outcome
 
-can you see this?
+
+---
+
+# First Step Prototype Scope
+
+Avoid scope creep by figuring out what our focus for the design is. The first interactive version of the application should be fixed to a minimal and testable baseline.
+
+### Primary Prototype Audience
+
+* **Target Cohort:** Motivated freshman, sophomore, and junior students with little to no practical project experience who want internship-ready proof.
+
+* **Launch-Priority Roles:** Engineer (Software/Web/Data), Designer (UI/UX/Research), and Business/Product (Strategy/Marketing). 
+
+
+# Prototype Must-Have Scope
+
+This is the version for testing the idea with users, maybe even manually behind the scenes.
+
+---
+
+## Core Components
+
+### 1. Onboarding & Recommendations
+* **Simple Onboarding Survey:** Collect major, year, target role, interests, experience level, and weekly availability.
+* **Career / Role Recommendation Result:** Show the user 1-3 suggested directions: Engineer, Designer, or Business/Product/Marketing.
+
+### 2. Project Exploration
+* **Project Track Cards:** A small curated set of beginner projects, maybe 6-9 total:
+  * Web app / campus tool
+  * Data dashboard
+  * UX redesign
+  * Product discovery sprint
+  * Marketing/growth campaign
+  * Consulting-style strategy project
+
+* **Project Detail Page:** Each project explicitly includes:
+  * Goal
+  * Required roles
+  * Difficulty
+  * Timeline
+  * Final output
+  * Weekly milestones
+  
+* **Role Guide:** Explain what each role does in the project for:
+  * Engineer
+  * Designer
+  * Business/Product/Marketing
+
+### 3. Team Formation & Execution
+* **Compatibility RSVP:** A low-stakes check-in capturing role preferences, availability, and contact info—designed to feel like a quick setup rather than a job application.
+* **Algorithmic Matchmaking Queue:** An automated background process that pools active RSVPs and groups students into teams of 3–4 once scheduling and role criteria are met, removing the manual admin bottleneck.
+* **Weekly Milestone Checklist:** A static or semi-static checklist for 4-5 weeks. The key is structure, not automation.
+
+### 4. Project Closure
+* **Final Output Guide:** Help users turn the project into a resume bullet, portfolio summary, GitHub README, case study, or deck outline.
+
+---
+
+## Primary Objective
+* **Prototype Goal:** Validate whether students understand the value of the platform and would actually commit.
+
+
