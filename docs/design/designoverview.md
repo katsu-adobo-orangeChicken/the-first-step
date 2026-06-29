@@ -24,3 +24,17 @@ or
 Explore new projects
 or
 Check team/workflow/messages
+
+Pages we need 
+
+1. Landing Page
+2. Create Account Page
+3. Build Profile Page
+4. Tell Us About Goals Page
+5. Suggested Directions Page
+6. Explore Recommended Projects Page
+7. Project Detail Page
+8. Join or Start Project Page
+9. Find Teammates Page
+10. Main Dashboard Page
+11. Project Workflow Page
