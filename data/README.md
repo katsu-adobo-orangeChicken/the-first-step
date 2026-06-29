@@ -10,6 +10,463 @@ The app is not just a job board or a generic project list. It is a **career-read
 3. Join another user's active project/team
 ```
 
+# Data Storage
+A majority of the data is relational, structured, and transactional
+
+## Storage Requirements To Complete This Scope
+
+The current data scopes imply a relational database, but the storage plan should also explicitly define how the application handles indexes, uploaded assets, retention, caching, backups, and privacy-sensitive data.
+
+Recommended MVP storage approach:
+
+| Storage Concern | MVP Decision |
+|---|---|
+| Primary database | PostgreSQL |
+| Database style | Relational, transactional, module-owned tables |
+| File/asset storage | Object storage such as Supabase Storage, S3, or Cloudflare R2 |
+| Search/filter performance | Database indexes first; external search later only if needed |
+| Caching | Minimal server/client cache for public catalog data |
+| Retention | Soft-delete user-owned records first; hard-delete after defined retention window |
+| Backups | Daily automated database backups once real users exist |
+
+## Database Index Plan
+
+Indexes are needed because the app will frequently filter career tracks, project templates, project ideas, teams, open roles, and join requests.
+
+Start with indexes for the queries the MVP actually needs.
+
+| Table | Index | Why |
+|---|---|---|
+| `users` | `email` unique | login and account lookup |
+| `users` | `account_status` | admin filtering and moderation |
+| `profiles` | `user_id` unique | fast profile lookup for current user |
+| `profiles` | `institution_id` | school-based discovery and trust |
+| `profiles` | `target_role` | matching and recommendations |
+| `profiles` | `school_year` | cohort filtering |
+| `onboarding_responses` | `user_id` | recommendation lookup |
+| `career_tracks` | `slug` unique | track page routing |
+| `project_templates` | `career_track_id` | show templates on a career-track page |
+| `project_templates` | `visibility, career_track_id` | only show public templates in a track |
+| `project_templates` | `difficulty` | filter by beginner/intermediate |
+| `project_ideas` | `creator_user_id` | show projects created by a user |
+| `project_ideas` | `career_track_id, status` | show active ideas on a career-track page |
+| `project_ideas` | `visibility, status` | public discovery feed |
+| `teams` | `career_track_id, status` | show forming/active teams by track |
+| `teams` | `project_template_id` | show teams started from a template |
+| `teams` | `project_idea_id` | show teams connected to an idea |
+| `teams` | `owner_user_id` | show teams managed by a user |
+| `team_role_slots` | `team_id, status` | show open roles for a team |
+| `team_members` | `team_id` | team roster lookup |
+| `team_members` | `user_id` | user dashboard lookup |
+| `join_requests` | `team_id, status` | team owner approval queue |
+| `join_requests` | `user_id, status` | applicant request history |
+| `workspaces` | `team_id` unique | one workspace per team |
+| `milestones` | `workspace_id, week_number` | workspace timeline |
+| `tasks` | `milestone_id, status` | milestone task checklist |
+| `submissions` | `task_id` | task deliverables |
+| `final_outputs` | `team_id` | final project package |
+| `reports` | `status` | moderation queue |
+| `analytics_events` | `event_name, created_at` | product analytics queries |
+
+Possible later indexes:
+
+```txt
+Full-text search on project template title/description
+Full-text search on project idea title/problem statement
+Composite index for role + availability + career track matching
+```
+
+Avoid adding every possible index on day one. Each index speeds up reads but slows down writes and adds database maintenance cost.
+
+## Asset Storage Plan
+
+The database should store metadata and URLs, not the raw files themselves.
+
+Assets the app may need:
+
+| Asset Type | Examples | Storage Location |
+|---|---|---|
+| Profile avatars | user profile image | object storage |
+| Project attachments | PDFs, decks, screenshots | object storage |
+| Final portfolio files | exported case study PDF, resume package | object storage |
+| Submission previews | dashboard screenshot, Figma preview image | object storage |
+| Verification artifacts | only if absolutely needed later | restricted/private object storage |
+
+Recommended asset metadata table:
+
+| Data | Examples |
+|---|---|
+| Asset ID | UUID |
+| Owner user ID | uploader |
+| Team ID | optional |
+| Related entity type | profile, submission, final_output |
+| Related entity ID | UUID |
+| File name | `case-study.pdf` |
+| MIME type | `application/pdf` |
+| File size | bytes |
+| Storage provider | S3, Supabase, R2 |
+| Storage key | private object key |
+| Public URL | optional |
+| Visibility | public, team-only, private |
+| Created date | timestamp |
+
+MVP rule:
+
+```txt
+Use external links first when possible.
+Only add file uploads when the product needs them.
+```
+
+For example, GitHub, Figma, Notion, Google Docs, Tableau, and deployed app links can be stored as URLs before building upload infrastructure.
+
+## Data Retention Policy
+
+Retention matters because the app stores student identity, profile, team participation, and career artifacts.
+
+Suggested MVP retention rules:
+
+| Data | Retention Rule |
+|---|---|
+| User account | keep while account is active |
+| Deleted account | soft-delete immediately, hard-delete after 30-90 days |
+| Student profile | delete or anonymize when account is deleted |
+| Onboarding answers | delete or anonymize when account is deleted |
+| Project templates | keep indefinitely unless archived |
+| Project ideas | keep while public/active; archive when inactive |
+| Teams | keep completed teams for portfolio history unless deleted/requested |
+| Join requests | keep for 12-18 months, then archive/delete |
+| Workspace tasks/submissions | keep while team exists; archive completed projects |
+| Final outputs | keep until user/team deletes or account deletion requires removal |
+| Analytics events | aggregate after 12-24 months; delete raw user-level events |
+| Reports/moderation data | keep longer, such as 2-3 years, for safety audit history |
+
+Recommended deletion states:
+
+```txt
+active
+archived
+soft_deleted
+hard_deleted
+```
+
+For most MVP records, use soft delete first:
+
+| Field | Purpose |
+|---|---|
+| `deleted_at` | hides record without immediately destroying history |
+| `archived_at` | keeps completed/inactive records out of active views |
+| `deleted_by_user_id` | audit trail |
+
+## Caching Requirements
+
+Most MVP data should come directly from PostgreSQL. Add caching only where the data is read often and changes rarely.
+
+Good candidates for caching:
+
+| Data | Cache Reason |
+|---|---|
+| Career tracks | public, low-change catalog data |
+| Project templates | public, low-change catalog data |
+| Role guides | static educational content |
+| Skill lists | static filter data |
+| Track page counts | useful but can be slightly stale |
+
+Do not aggressively cache:
+
+| Data | Why |
+|---|---|
+| Join requests | status must be fresh |
+| Team membership | users need accurate roster/open role state |
+| Workspace tasks | collaboration state changes often |
+| Submissions | users expect immediate updates |
+
+MVP caching approach:
+
+```txt
+Use frontend/request caching for public catalog reads.
+Use database queries for transactional data.
+Add Redis only after real traffic proves it is needed.
+```
+
+Suggested cache durations:
+
+| Data | TTL |
+|---|---|
+| Career tracks | 10-60 minutes |
+| Project templates | 10-60 minutes |
+| Role guides | 1-24 hours |
+| Discovery counts | 1-5 minutes |
+
+## Backup And Recovery Requirements
+
+Once the app has real users, backups become part of storage.
+
+Minimum backup plan:
+
+| Requirement | MVP Decision |
+|---|---|
+| Database backups | daily automated backups |
+| Backup retention | 7-30 days for MVP |
+| Restore testing | test restore before launch/pilot |
+| Object storage backups | versioning or provider-level recovery if available |
+| Migration safety | review migrations before production deploy |
+
+## Privacy And Access Rules
+
+The database should enforce basic access expectations at the application layer.
+
+| Data | Access Rule |
+|---|---|
+| Public project templates | visible to everyone |
+| Public project ideas | visible to logged-in users or everyone, depending on product choice |
+| School-only project ideas | visible only to same institution users |
+| Team workspace | visible only to team members |
+| Join requests | visible to applicant and team owner/admin |
+| Reports | visible only to admins/moderators |
+| Analytics | internal only |
+
+Important MVP rule:
+
+```txt
+Do not expose private profile fields, join request details, or team workspace data through public discovery APIs.
+```
+
+## Storage Completion Checklist
+
+To consider storage planning complete for the MVP, define:
+
+```txt
+[ ] Primary database choice
+[ ] Core tables/entities
+[ ] Relationship ownership by module
+[ ] Required indexes for MVP queries
+[ ] Asset storage strategy
+[ ] Asset metadata table
+[ ] Data retention and deletion policy
+[ ] Caching strategy for catalog/discovery pages
+[ ] Backup and recovery plan
+[ ] Privacy/access rules for public vs private data
+```
+
+## Third-Party Data And External Integrations
+
+The app will reference external tools because most student project proof already lives outside the platform: GitHub, Figma, Notion, Google Docs, deployed apps, dashboards, and portfolio sites.
+
+For MVP, third-party data should be split into two levels:
+
+```txt
+Level 1: Store external links only
+Level 2: Actively fetch metadata through third-party APIs
+```
+
+Start with Level 1 unless metadata is required for trust, verification, or a better user experience.
+
+### External Link Data
+
+These are URLs users manually provide.
+
+| External Source | Example Data | MVP Behavior |
+|---|---|---|
+| GitHub | repo URL, profile URL | store URL |
+| Figma | prototype URL, design file URL | store URL |
+| Notion | project doc, case study | store URL |
+| Google Docs/Slides | PRD, deck, research notes | store URL |
+| Tableau/Looker Studio | dashboard URL | store URL |
+| Deployed app | Vercel, Netlify, Railway URL | store URL |
+| LinkedIn | profile URL, project post URL | store URL |
+| Portfolio site | personal website URL | store URL |
+| Discord/Slack | team communication link | store URL, team-only visibility |
+
+Recommended external link fields:
+
+| Data | Examples |
+|---|---|
+| External link ID | UUID |
+| Owner user ID | uploader |
+| Team ID | optional |
+| Related entity type | profile, submission, final_output |
+| Related entity ID | UUID |
+| URL | `https://github.com/user/project` |
+| Provider | GitHub, Figma, Notion, Google Docs, Other |
+| Link type | repo, prototype, document, dashboard, deployed_app |
+| Visibility | public, team-only, private |
+| User-provided label | Final demo, PRD, Figma prototype |
+| Created date | timestamp |
+| Last checked date | optional |
+| Last check status | unchecked, valid, invalid, inaccessible |
+
+### Active Third-Party API Fetching
+
+Some integrations can fetch metadata from external services, but they should be added intentionally.
+
+| Integration | Data We Might Fetch | Why |
+|---|---|---|
+| GitHub API | repo name, description, stars, default branch, latest commit, contributors | verify repo exists and summarize engineering work |
+| Figma API | file name, last modified date, thumbnail | verify design artifact and show preview |
+| Google Drive API | document title, file type, permission status | verify submitted docs are accessible |
+| Notion API | page title, last edited time | verify project docs if user connects Notion |
+| LinkedIn | profile/post metadata | likely avoid for MVP because API access is limited |
+| School email provider | email domain verification | verify student identity |
+| LLM API | resume bullets, portfolio summaries, interview stories | generate final career-ready output |
+
+MVP recommendation:
+
+```txt
+Required for MVP:
+- School email verification
+- Store external links
+- Optional link health check
+- LLM generation only if final-output automation is part of MVP
+
+Not required for MVP:
+- Deep GitHub contribution analysis
+- Figma file inspection
+- Google Drive/Notion OAuth
+- LinkedIn scraping or API integration
+```
+
+### Third-Party Metadata Cache
+
+When the app fetches third-party metadata, store a small cached copy. Do not depend on external APIs every time a user opens a page.
+
+Recommended metadata table:
+
+| Data | Examples |
+|---|---|
+| Metadata ID | UUID |
+| External link ID | related link |
+| Provider | GitHub |
+| Fetch status | success, failed, unauthorized, rate_limited |
+| Fetched title | repo or file name |
+| Fetched description | repo description |
+| Fetched thumbnail URL | Figma/deployed page preview |
+| Provider updated date | external last modified date |
+| Raw metadata JSON | limited provider response |
+| Last fetched date | timestamp |
+| Next refresh date | timestamp |
+
+Cache refresh rules:
+
+| Data | Refresh Rule |
+|---|---|
+| GitHub repo metadata | every 6-24 hours while project is active |
+| Figma file metadata | every 24 hours while project is active |
+| Google/Notion document metadata | only on submission or manual refresh |
+| Deployed app link status | on submission and before final output export |
+| LLM-generated text | store generated output, regenerate only on user request |
+
+### Verification Rules For External Links
+
+External validation should answer simple questions:
+
+```txt
+Does the link exist?
+Can the team/reviewer access it?
+Does it match the expected artifact type?
+Was it submitted by the right user/team?
+```
+
+MVP validation levels:
+
+| Level | Behavior |
+|---|---|
+| None | store whatever URL the user enters |
+| Basic | validate URL format and provider domain |
+| Link check | make a request to confirm the URL resolves |
+| Metadata check | call provider API and store title/status |
+| Ownership check | require OAuth or provider authentication |
+
+Recommended MVP level:
+
+```txt
+Use Basic validation for all links.
+Use Link check for final outputs if easy.
+Use Metadata check later for GitHub/Figma.
+Avoid Ownership check until users clearly need it.
+```
+
+### LLM API Data
+
+If the app generates resume bullets, LinkedIn blurbs, portfolio summaries, or interview stories, the LLM API needs its own data rules.
+
+Inputs sent to the LLM may include:
+
+| Input | Example |
+|---|---|
+| Career track | Software Engineering |
+| Project title | Campus Study Buddy |
+| User role | Backend Developer |
+| User contributions | built auth, database schema, API routes |
+| Final artifacts | GitHub repo, deployed demo |
+| Skills used | React, Node, PostgreSQL |
+| Target internship | SWE intern |
+
+Generated outputs:
+
+| Output | Example |
+|---|---|
+| Resume bullets | 2-3 bullet options |
+| LinkedIn project description | short post/project summary |
+| Portfolio summary | paragraph or case-study outline |
+| Interview story | STAR format |
+
+LLM storage fields:
+
+| Data | Examples |
+|---|---|
+| Generation ID | UUID |
+| User ID | requester |
+| Team ID | project team |
+| Prompt type | resume_bullet, portfolio_summary |
+| Input snapshot | structured JSON used for generation |
+| Generated text | model output |
+| Model provider | OpenAI |
+| Model name | model used |
+| Created date | timestamp |
+| User edited version | optional final version |
+
+LLM privacy rule:
+
+```txt
+Do not send private profile data, private messages, reports, or sensitive school verification data to an LLM provider.
+Only send project/contribution data needed to generate the requested career output.
+```
+
+### Third-Party API Credentials
+
+If the platform connects to external APIs, credentials should never be stored in frontend code.
+
+| Credential | Storage Rule |
+|---|---|
+| API keys | server environment variables or secret manager |
+| OAuth access tokens | encrypted database column or managed auth provider |
+| OAuth refresh tokens | encrypted and access-controlled |
+| Webhook secrets | secret manager/environment variables |
+
+MVP rule:
+
+```txt
+Prefer API-key based server integrations first.
+Avoid user OAuth integrations until the product clearly needs them.
+```
+
+### Third-Party Data Completion Checklist
+
+To consider third-party data planning complete for the MVP, define:
+
+```txt
+[ ] Which external links users can submit
+[ ] External link table/schema
+[ ] Which providers are link-only vs API-connected
+[ ] URL validation rules
+[ ] Metadata fetch rules
+[ ] Metadata cache table/schema
+[ ] Rate limit and retry strategy
+[ ] LLM input/output storage rules
+[ ] Privacy rules for external APIs
+[ ] Secret storage plan for API keys/OAuth tokens
+```
+
 
 # Application Data Scopes:
 
