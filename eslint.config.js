@@ -1,38 +1,78 @@
-// eslint.config.js
 import js from "@eslint/js";
 import jsdoc from "eslint-plugin-jsdoc";
 import globals from "globals";
 
 export default [
-  // Global ignores: Tell ESLint not to look at these directories
   {
     ignores: [
       "node_modules/",
       "docs/",
       ".github/",
       "dist/",
-      "prototype/syrena-prototype/dist/"
+      "prototype/"
     ]
   },
-  // Global linting rules for future JavaScript
+  js.configs.recommended,
   {
-    files: ["**/*.js"],
+    files: ["src/**/*.{js,jsx}", "vite.config.js"],
     languageOptions: {
       ecmaVersion: "latest",
       sourceType: "module",
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true
+        }
+      },
       globals: {
         ...globals.browser,
         ...globals.node,
       },
     },
     plugins: {
-      jsdoc: jsdoc,
+      jsdoc
     },
     rules: {
-      ...js.configs.recommended.rules,
       ...jsdoc.configs['flat/recommended'].rules,
+      "jsdoc/require-jsdoc": "off",
       "no-unused-vars": "warn",
       "no-console": "off"
     },
+  },
+  {
+    files: ["src/app/**/*.{js,jsx}"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          "patterns": [
+            {
+              "group": [
+                "**/Internal/**",
+                "src/modules/*/Internal/**",
+                "./modules/*/Internal/**",
+                "../modules/*/Internal/**"
+              ],
+              "message": "Import from a module's PublicApi/index.js instead of its Internal implementation."
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    files: ["src/shared/**/*.{js,jsx}"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          "patterns": [
+            {
+              "group": ["**/modules/**", "src/modules/**"],
+              "message": "Shared code must stay domain-agnostic and must not import application modules."
+            }
+          ]
+        }
+      ]
+    }
   }
 ];
