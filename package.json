@@ -5,10 +5,12 @@
   "type": "module",
   "description": "A beginner-first project matching platform.",
   "scripts": {
-    "dev": "vite prototype/syrena-prototype --config prototype/syrena-prototype/vite.config.js",
-    "build": "vite build prototype/syrena-prototype --config prototype/syrena-prototype/vite.config.js",
-    "preview": "vite preview prototype/syrena-prototype --config prototype/syrena-prototype/vite.config.js",
-    "lint:js": "eslint ."
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint .",
+    "lint:js": "eslint .",
+    "check": "npm run lint && npm run build"
   },
   "repository": {
     "type": "git",
