@@ -38,3 +38,7 @@ Pages we need
 9. Find Teammates Page
 10. Main Dashboard Page
 11. Project Workflow Page
+12. Login Page 
+13. Team Detail Page 
+14. Create Team Page 
+15. Task Modal
