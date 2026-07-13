@@ -20,6 +20,7 @@ export default function App() {
         {/*The area to put each modules, these are the components that will be organized or formatted by the main section */}
         <CareerCatalogPage />
         
+        
       </main>
       
       {/* Footer can go here eventually */}
