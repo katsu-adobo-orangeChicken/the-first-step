@@ -1,18 +1,29 @@
+import { CareerCatalogPage } from "../modules/career-catalog/PublicAPI";
+
 export default function App() {
   return (
-    <main className="min-h-screen bg-slate-950 px-6 py-10 text-slate-100">
-      <section className="mx-auto max-w-4xl">
-        <p className="text-sm font-semibold uppercase tracking-wide text-cyan-300">
+    
+    //Layout Shell, the most outer container for the entire application.
+    //These are the default global properties of the website we will use.
+    <div className="min-h-screen bg-slate-950 text-slate-100 font-sans">
+      
+      {/*This is the global header for the application, the navigation bar above.*/}
+      <header className="border-b border-slate-800 p-6">
+        <h1 className="text-xl font-bold tracking-tight text-white">
           The First Step
-        </p>
-        <h1 className="mt-3 text-4xl font-bold tracking-normal">
-          Modular Monolith MVP Foundation
         </h1>
-        <p className="mt-4 max-w-2xl text-lg text-slate-300">
-          The real application now starts from src/app and is ready for the
-          first vertical slice under src/modules.
-        </p>
-      </section>
-    </main>
+      </header>
+
+      {/*The main section where the global layout of the application resides. Doesn't know what is inside but it is in charge of modeling and figuring out how each content should live on the screen*/}
+      <main className="flex-1 flex flex-col p-8">
+        
+        {/*The area to put each modules, these are the components that will be organized or formatted by the main section */}
+        <CareerCatalogPage />
+        
+        
+      </main>
+      
+      {/* Footer can go here eventually */}
+    </div>
   );
 }
