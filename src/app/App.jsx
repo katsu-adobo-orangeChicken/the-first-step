@@ -1,5 +1,6 @@
 import { CareerCatalogPage } from "../modules/career-catalog/PublicAPI";
 import { LandingPage } from "../modules/landing-page/PublicAPI";
+import { BuildProfilePage, OnboardingPage } from "../modules/onboarding/PublicAPI"
 
 import { Route, Routes, Link } from "react-router-dom";
 
@@ -23,10 +24,10 @@ export default function App() {
           <h3>Projects</h3>
         </div>
 
-        <div className="justify-self-end flex">
-          <div className="">
+        <div className="justify-self-end flex gap-6">
+          <div className="flex items-center gap-4">
             <h2>Log In</h2>
-            <h2>Sign Up</h2>
+            <Link to="/onboarding-process">Sign Up</Link>
           </div>
 
           <div>
@@ -43,6 +44,8 @@ export default function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/discover" element={<CareerCatalogPage />} />
+          <Route path="/onboarding-process" element={<OnboardingPage />} />
+          <Route path="/onboarding-process/build-profile" element={<BuildProfilePage />} />
         </Routes>
         
         
