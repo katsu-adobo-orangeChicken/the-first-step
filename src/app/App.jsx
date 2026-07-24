@@ -1,4 +1,8 @@
 import { CareerCatalogPage } from "../modules/career-catalog/PublicAPI";
+import { LandingPage } from "../modules/landing-page/PublicAPI";
+import { BuildProfilePage, OnboardingPage } from "../modules/onboarding/PublicAPI"
+
+import { Route, Routes, Link } from "react-router-dom";
 
 export default function App() {
   return (
@@ -8,17 +12,41 @@ export default function App() {
     <div className="min-h-screen bg-slate-950 text-slate-100 font-sans">
       
       {/*This is the global header for the application, the navigation bar above.*/}
-      <header className="border-b border-slate-800 p-6">
+      <header className="border-b border-slate-800 p-6 items-center grid grid-cols-3">
         <h1 className="text-xl font-bold tracking-tight text-white">
-          The First Step
+          <Link to="/">The First Step</Link>
         </h1>
+
+        <div className="inline-flex gap-6 justify-self-center">
+          <Link to="/discover">Discover</Link>
+          {/* Placeholder buttons */}
+          <h2>About</h2>
+          <h3>Projects</h3>
+        </div>
+
+        <div className="justify-self-end flex gap-6">
+          <div className="flex items-center gap-4">
+            <h2>Log In</h2>
+            <Link to="/onboarding-process">Sign Up</Link>
+          </div>
+
+          <div>
+            <h2>**Profile Picture Should Be Here**</h2>
+          </div>
+          
+        </div>
       </header>
 
       {/*The main section where the global layout of the application resides. Doesn't know what is inside but it is in charge of modeling and figuring out how each content should live on the screen*/}
       <main className="flex-1 flex flex-col p-8">
         
         {/*The area to put each modules, these are the components that will be organized or formatted by the main section */}
-        <CareerCatalogPage />
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/discover" element={<CareerCatalogPage />} />
+          <Route path="/onboarding-process" element={<OnboardingPage />} />
+          <Route path="/onboarding-process/build-profile" element={<BuildProfilePage />} />
+        </Routes>
         
         
       </main>

@@ -3,9 +3,7 @@ import ProjectCard from "./project-card";
 import { useState } from 'react'
 
 export default function CareerCatalogPage() {
-
-    const [choseDiscoveryPage, setChoseDiscoveryPage] = useState(false);
-
+    
     /* Used for search bar */
     const [userSearchInput, setUserSearchInput] = useState('');
     const [appliedSearchTerm, setAppliedSearchTerm] = useState('');
@@ -18,15 +16,7 @@ export default function CareerCatalogPage() {
         setAppliedSearchTerm(userSearchInput.trim());
     };
 
-    if (!choseDiscoveryPage) {
-        return (
-            <div className="flex flex-col items-center gap-4">
-
-                <button className="rounded-2xl bg-gray-500 px-3 py-4 transition hover:bg-gray-300" onClick={() => setChoseDiscoveryPage(true)}>See The Discovery Page Tracks</button>
-
-            </div>
-        )
-    }
+    
     
     const projects = [
         {
