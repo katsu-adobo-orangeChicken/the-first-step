@@ -1,51 +1,44 @@
-export default function ProjectCard( { projectObject} ) {
-   
-    function handleProjectClicks() {
-        alert("A project has been clicked, should redirect to that specific 'WIP' page.");
-    }
+export default function ProjectCard({ projectObject }) {
+  const difficultyColors = {
+    Beginner: "text-emerald-600",
+    Intermediate: "text-amber-600",
+    Advanced: "text-rose-600",
+  };
 
-    const difficultyColors = {
-        Beginner: "text-green-600",
-        Intermediate: "text-orange-600",
-        Advanced: "text-red-600"
-    }
+  return (
+    <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-transform duration-200 hover:-translate-y-1 hover:shadow-md">
+      <div className="h-44 bg-slate-100">
+        <img
+          src={projectObject.imageURL}
+          alt={projectObject.title}
+          className="h-full w-full object-cover"
+        />
+      </div>
 
-    return (
-
-    <div className="flex flex-col h-full bg-gray-300 rounded-xl shadow-md overflow-hidden border border-slate-200 hover:shadow-lg transition-shadow duration-300" onClick={handleProjectClicks}>
-
-        <div className="h-48">
-            {/* Image Container */}
-            <img 
-                src={projectObject.imageURL} 
-                alt={projectObject.title} 
-                className="w-full h-40 object-cover" 
-            />
+      <div className="flex flex-1 flex-col p-5">
+        <div className="flex items-start justify-between gap-3">
+          <h3 className="text-lg font-semibold text-slate-900">{projectObject.title}</h3>
+          <span className={`text-sm font-semibold ${difficultyColors[projectObject.difficulty]}`}>
+            {projectObject.difficulty}
+          </span>
         </div>
-        
-        {/* Content Container */}
-        <div className="p-5">
-            <h3 className="text-lg font-bold text-slate-900 mb-2">{projectObject.title}</h3>
-            <h4 className={`text-sm font-bold ${difficultyColors[projectObject.difficulty]}`}>
-                {projectObject.difficulty}
-            
-            </h4>
-            <p className="text-slate-600 text-sm leading-relaxed">{projectObject.description}</p>
 
-            <div className="mt-4 flex flex-wrap gap-2 text-xs">
-                <span className="rounded-md bg-slate-100 px-2 py-1 font-medium text-slate-700">
-                    Team: {projectObject.teamSize}
-                </span>
+        <p className="mt-3 text-sm leading-6 text-slate-600">{projectObject.description}</p>
 
-                <span className="rounded-md bg-blue-50 px-2 py-1 font-medium text-black">
-                    {projectObject.category.join(', ')}
-                </span>
-
-                <span className="w-full mt-1 text-slate-700 italic">
-                    Outcome: {projectObject.finalOutcome}
-                </span>
-            </div>
+        <div className="mt-4 flex flex-wrap gap-2 text-xs">
+          <span className="rounded-full bg-slate-100 px-2.5 py-1 font-medium text-slate-700">
+            Team: {projectObject.teamSize}
+          </span>
+          <span className="rounded-full bg-blue-50 px-2.5 py-1 font-medium text-blue-700">
+            {projectObject.category.join(", ")}
+          </span>
         </div>
-    </div>
+
+        <div className="mt-5 rounded-xl bg-slate-50 p-3 text-sm text-slate-600">
+          <p className="font-medium text-slate-800">Outcome</p>
+          <p className="mt-1">{projectObject.finalOutcome}</p>
+        </div>
+      </div>
+    </article>
   );
 }

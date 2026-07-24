@@ -42,15 +42,15 @@ const skillSignals = [
 
 export default function LandingPage() {
   return (
-    <section className="-m-8 bg-slate-50 text-slate-950">
+    <section className="bg-slate-50 text-slate-950">
       <div className="px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
-        <div className="mx-auto grid w-full max-w-7xl overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]">
+        <div className="mx-auto grid w-full max-w-7xl overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]">
           <div className="flex min-h-96 flex-col justify-center gap-6 border-b border-slate-200 p-6 sm:p-8 lg:border-b-0 lg:border-r lg:p-10">
             <div className="space-y-4">
-              <p className="text-sm font-semibold uppercase tracking-[0.25em] text-blue-600">
+              <p className="text-sm font-semibold uppercase text-blue-600">
                 Beginner-first projects
               </p>
-              <h1 className="max-w-xl text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl">
+              <h1 className="max-w-xl text-4xl font-bold text-slate-950 sm:text-5xl">
                 Build real experience before the resume asks for it.
               </h1>
               <p className="max-w-2xl text-base leading-7 text-slate-600">
@@ -63,13 +63,13 @@ export default function LandingPage() {
             <div className="flex flex-col gap-3 sm:flex-row">
               <Link
                 to="/onboarding-process"
-                className="rounded-2xl bg-blue-600 px-5 py-3 text-center text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700"
+                className="rounded-lg bg-blue-600 px-5 py-3 text-center text-sm font-semibold text-white shadow-sm transition hover:bg-blue-500"
               >
                 Start building
               </Link>
               <Link
                 to="/discover"
-                className="rounded-2xl border border-slate-200 bg-slate-50 px-5 py-3 text-center text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:bg-white"
+                className="rounded-lg border border-slate-200 bg-slate-50 px-5 py-3 text-center text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:bg-white"
               >
                 Browse projects
               </Link>
@@ -81,7 +81,7 @@ export default function LandingPage() {
                 ["6", "guided steps"],
                 ["Beginner", "friendly tracks"],
               ].map(([value, label]) => (
-                <div key={label} className="rounded-2xl bg-slate-100 p-4">
+                <div key={label} className="rounded-lg bg-slate-100 p-4">
                   <p className="text-2xl font-bold text-slate-950">{value}</p>
                   <p className="text-sm text-slate-500">{label}</p>
                 </div>
@@ -90,7 +90,7 @@ export default function LandingPage() {
           </div>
 
           <div className="bg-slate-100 p-4 sm:p-6 lg:p-8">
-            <div className="flex h-full min-h-96 flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-inner sm:p-5">
+            <div className="flex h-full min-h-96 flex-col gap-4 rounded-xl border border-slate-200 bg-white p-4 shadow-inner sm:p-5">
               <div className="flex items-center justify-between border-b border-slate-200 pb-4">
                 <div>
                   <p className="text-sm font-semibold text-slate-900">
@@ -109,11 +109,11 @@ export default function LandingPage() {
                 {featuredProjects.map((project) => (
                   <article
                     key={project.title}
-                    className="rounded-2xl border border-slate-200 bg-slate-50 p-4"
+                    className="rounded-lg border border-slate-200 bg-slate-50 p-4"
                   >
                     <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                       <div>
-                        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-600">
+                        <p className="text-xs font-semibold uppercase text-blue-600">
                           {project.tag}
                         </p>
                         <h2 className="mt-1 text-lg font-semibold text-slate-950">
@@ -145,7 +145,7 @@ export default function LandingPage() {
         <div className="mx-auto w-full max-w-7xl">
           <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.25em] text-blue-600">
+              <p className="text-sm font-semibold uppercase text-blue-600">
                 How it works
               </p>
               <h2 className="mt-2 text-2xl font-bold text-slate-950">
@@ -162,7 +162,7 @@ export default function LandingPage() {
             {workflowSteps.map((step, index) => (
               <div
                 key={step}
-                className="rounded-2xl border border-slate-200 bg-slate-50 p-4"
+                className="rounded-lg border border-slate-200 bg-slate-50 p-4"
               >
                 <span className="flex h-9 w-9 items-center justify-center rounded-full bg-blue-600 text-sm font-bold text-white">
                   {index + 1}
@@ -178,8 +178,8 @@ export default function LandingPage() {
 
       <div className="bg-slate-950 px-4 py-10 text-slate-100 sm:px-6 sm:py-12 lg:px-8">
         <div className="mx-auto grid w-full max-w-7xl gap-4 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
-          <div className="rounded-2xl border border-slate-800 bg-slate-900 p-5">
-            <p className="text-sm font-semibold uppercase tracking-[0.25em] text-blue-400">
+          <div className="rounded-lg border border-slate-800 bg-slate-900 p-5">
+            <p className="text-sm font-semibold uppercase text-blue-400">
               The First Step
             </p>
             <p className="mt-3 text-sm leading-6 text-slate-400">
@@ -198,7 +198,7 @@ export default function LandingPage() {
             {skillSignals.map((signal) => (
               <div
                 key={signal}
-                className="rounded-2xl border border-slate-800 bg-slate-900 p-5"
+                className="rounded-lg border border-slate-800 bg-slate-900 p-5"
               >
                 <p className="text-sm font-semibold text-white">{signal}</p>
                 <p className="mt-2 text-xs leading-5 text-slate-500">

@@ -1,57 +1,53 @@
 import { CareerCatalogPage } from "../modules/career-catalog/PublicAPI";
 import { LandingPage } from "../modules/landing-page/PublicAPI";
-import { BuildProfilePage, OnboardingPage } from "../modules/onboarding/PublicAPI"
+import {
+  BuildProfilePage,
+  OnboardingPage,
+  SurveyPage,
+  TrackPage,
+} from "../modules/onboarding/PublicAPI";
 
 import { Route, Routes, Link } from "react-router-dom";
 
 export default function App() {
   return (
-    
-    //Layout Shell, the most outer container for the entire application.
-    //These are the default global properties of the website we will use.
-    <div className="min-h-screen bg-slate-950 text-slate-100 font-sans">
-      
-      {/*This is the global header for the application, the navigation bar above.*/}
-      <header className="border-b border-slate-800 p-6 items-center grid grid-cols-3">
-        <h1 className="text-xl font-bold tracking-tight text-white">
-          <Link to="/">The First Step</Link>
-        </h1>
+    <div className="min-h-screen bg-slate-950 font-sans text-slate-100">
+      <header className="sticky top-0 z-20 border-b border-slate-800/80 bg-slate-950/90 px-4 py-4 backdrop-blur sm:px-6 lg:px-8">
+        <nav className="mx-auto flex max-w-7xl items-center justify-between gap-4">
+          <Link to="/" className="text-lg font-bold text-white">
+            The First Step
+          </Link>
 
-        <div className="inline-flex gap-6 justify-self-center">
-          <Link to="/discover">Discover</Link>
-          {/* Placeholder buttons */}
-          <h2>About</h2>
-          <h3>Projects</h3>
-        </div>
-
-        <div className="justify-self-end flex gap-6">
-          <div className="flex items-center gap-4">
-            <h2>Log In</h2>
-            <Link to="/onboarding-process">Sign Up</Link>
+          <div className="hidden items-center gap-6 text-sm font-medium text-slate-300 sm:flex">
+            <Link to="/discover" className="transition-colors hover:text-white">
+              Discover
+            </Link>
+            <Link to="/" className="transition-colors hover:text-white">
+              How it works
+            </Link>
           </div>
 
-          <div>
-            <h2>**Profile Picture Should Be Here**</h2>
+          <div className="flex items-center gap-3 text-sm font-medium">
+            <Link
+              to="/onboarding-process"
+              className="rounded-lg bg-blue-600 px-4 py-2 text-white shadow-sm transition-colors hover:bg-blue-500"
+            >
+              Sign up
+            </Link>
           </div>
-          
-        </div>
+        </nav>
       </header>
 
-      {/*The main section where the global layout of the application resides. Doesn't know what is inside but it is in charge of modeling and figuring out how each content should live on the screen*/}
-      <main className="flex-1 flex flex-col p-8">
-        
-        {/*The area to put each modules, these are the components that will be organized or formatted by the main section */}
+      <main className="flex flex-1 flex-col">
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/discover" element={<CareerCatalogPage />} />
           <Route path="/onboarding-process" element={<OnboardingPage />} />
           <Route path="/onboarding-process/build-profile" element={<BuildProfilePage />} />
+          <Route path="/onboarding-process/build-profile/survey" element={<SurveyPage />} />
+          <Route path="/onboarding-process/build-profile/survey/track" element={<TrackPage />} />
         </Routes>
-        
-        
       </main>
-      
-      {/* Footer can go here eventually */}
     </div>
   );
 }
