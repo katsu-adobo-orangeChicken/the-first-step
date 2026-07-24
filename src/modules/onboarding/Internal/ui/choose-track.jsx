@@ -5,17 +5,20 @@ const tracks = [
   {
     title: "Developer",
     description:
-      "Build products and solve problems.",
+      "Build products and solve problems with a hands-on, implementation-focused path.",
+    focus: "Apps, tools, and product delivery",
   },
   {
     title: "Designer",
     description:
-      "Design the product tailor to the user/consumer.",
+      "Shape the experience around real users and meaningful interactions.",
+    focus: "Research, UX, and visual direction",
   },
   {
-    title: "Business/Marketing",
+    title: "Business / Marketing",
     description:
-      "Deal with marketing, strategy, and communication within the team.",
+      "Turn ideas into traction through positioning, communication, and strategy.",
+    focus: "Go-to-market and team coordination",
   },
 ];
 
@@ -35,9 +38,8 @@ export default function ChooseTrack() {
           >
             <div>
               <h3 className="text-xl font-bold text-white">{track.title}</h3>
-              <p className="mt-3 text-sm leading-6 text-slate-400">
-                {track.description}
-              </p>
+              <p className="mt-3 text-sm leading-6 text-slate-400">{track.description}</p>
+              <p className="mt-4 text-sm font-medium text-blue-400">{track.focus}</p>
             </div>
 
             <Link
