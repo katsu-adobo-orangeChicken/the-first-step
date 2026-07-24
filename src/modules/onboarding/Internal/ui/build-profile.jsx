@@ -1,4 +1,8 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import MultiStepFormWrapper from "./component-multiStepFormWrapper.jsx";
+import SearchableMultiSelect from "./component-searchableMultiSelect.jsx";
+import StepsNavBar from "./component-stepNavigationBar.jsx";
 
 const interestOptions = [
   "Technology",
@@ -10,6 +14,7 @@ const interestOptions = [
 ];
 
 export default function BuildProfile() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     preferredName: "",
     location: "",
@@ -31,55 +36,22 @@ export default function BuildProfile() {
     }));
   };
 
-  const handleInterestToggle = (interest) => {
-    setSelectedInterests((prevInterests) =>
-      prevInterests.includes(interest)
-        ? prevInterests.filter((item) => item !== interest)
-        : [...prevInterests, interest]
-    );
-  };
-
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log("Profile Submitted:", {
       ...formData,
       interests: selectedInterests,
     });
+    navigate("/onboarding-process/build-profile/survey");
   };
 
   return (
-    <section className="-m-8 flex min-h-screen flex-col items-center gap-12 bg-slate-950 px-4 py-12 text-slate-100 sm:px-6 lg:px-8">
-      <div className="flex w-full max-w-2xl flex-col gap-6 text-center">
-        <div>
-          <h2 className="text-3xl font-extrabold tracking-tight text-white">
-            Build your profile
-          </h2>
-          <p className="mt-2 text-slate-400">
-            Tell us what you are interested in so project matches feel useful
-            from the start.
-          </p>
-        </div>
-
-        <div className="flex flex-wrap items-center justify-center gap-3 text-sm font-medium">
-          <span className="rounded-full border border-green-500/20 bg-green-500/10 px-3 py-1 text-green-400">
-            1. Account
-          </span>
-          <span className="text-slate-600">-&gt;</span>
-          <span className="rounded-full border border-blue-500/20 bg-blue-500/10 px-3 py-1 text-blue-500">
-            2. Profile
-          </span>
-          <span className="text-slate-600">-&gt;</span>
-          <span className="rounded-full border border-slate-800 bg-slate-900 px-3 py-1 text-slate-500">
-            3. Survey
-          </span>
-          <span className="text-slate-600">-&gt;</span>
-          <span className="rounded-full border border-slate-800 bg-slate-900 px-3 py-1 text-slate-500">
-            4. Track
-          </span>
-        </div>
-      </div>
-
-      <div className="w-full max-w-2xl rounded-2xl border border-slate-800 bg-slate-900 p-6 shadow-xl sm:p-8">
+    <MultiStepFormWrapper
+      currentStep={2}
+      title="Build your profile"
+      description="Tell us what you are interested in so project matches feel useful from the start."
+    >
+      <div className="w-full max-w-2xl rounded-xl border border-slate-800 bg-slate-900/80 p-6 shadow-2xl shadow-slate-950/20 sm:p-8">
         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
           <div className="grid gap-5 sm:grid-cols-2">
             <div className="flex flex-col gap-2">
@@ -189,31 +161,13 @@ export default function BuildProfile() {
             </select>
           </div>
 
-          <div className="flex flex-col gap-3">
-            <span className="text-sm font-medium text-slate-300">
-              Interests
-            </span>
-            <div className="grid gap-2 sm:grid-cols-3">
-              {interestOptions.map((interest) => {
-                const isSelected = selectedInterests.includes(interest);
-
-                return (
-                  <button
-                    key={interest}
-                    type="button"
-                    onClick={() => handleInterestToggle(interest)}
-                    className={`rounded-lg border px-3 py-2 text-sm font-medium transition ${
-                      isSelected
-                        ? "border-blue-500 bg-blue-500/10 text-blue-400"
-                        : "border-slate-800 bg-slate-950 text-slate-400 hover:border-slate-700 hover:text-slate-200"
-                    }`}
-                  >
-                    {interest}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
+          <SearchableMultiSelect
+            label="Interests"
+            options={interestOptions}
+            selectedValues={selectedInterests}
+            onChange={setSelectedInterests}
+            placeholder="Search interests or add your own"
+          />
 
           <div className="flex flex-col gap-2">
             <label
@@ -249,14 +203,13 @@ export default function BuildProfile() {
             />
           </div>
 
-          <button
-            type="submit"
-            className="mt-2 w-full rounded-lg bg-blue-600 px-4 py-3 font-semibold text-white shadow-md transition-colors hover:bg-blue-700"
-          >
-            Save Profile
-          </button>
+          <StepsNavBar
+            onBack={() => navigate("/onboarding-process")}
+            continueLabel="Save Profile"
+            continueType="submit"
+          />
         </form>
       </div>
-    </section>
+    </MultiStepFormWrapper>
   );
 }
