@@ -1,5 +1,5 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useOnboardingDraftSection } from "../data/onboarding-persistence.js";
 import MultiStepFormWrapper from "./component-multiStepFormWrapper.jsx";
 import SearchableMultiSelect from "./component-searchableMultiSelect.jsx";
 import StepsNavBar from "./component-stepNavigationBar.jsx";
@@ -15,17 +15,7 @@ const interestOptions = [
 
 export default function BuildProfile() {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    preferredName: "",
-    location: "",
-    currentRole: "",
-    experienceLevel: "",
-    availability: "",
-    portfolioLink: "",
-    bio: "",
-  });
-
-  const [selectedInterests, setSelectedInterests] = useState([]);
+  const [formData, setFormData] = useOnboardingDraftSection("profile");
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -36,12 +26,16 @@ export default function BuildProfile() {
     }));
   };
 
+  const handleInterestsChange = (interests) => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      interests,
+    }));
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Profile Submitted:", {
-      ...formData,
-      interests: selectedInterests,
-    });
+    console.log("Profile Submitted:", formData);
     navigate("/onboarding-process/build-profile/survey");
   };
 
@@ -164,8 +158,8 @@ export default function BuildProfile() {
           <SearchableMultiSelect
             label="Interests"
             options={interestOptions}
-            selectedValues={selectedInterests}
-            onChange={setSelectedInterests}
+            selectedValues={formData.interests}
+            onChange={handleInterestsChange}
             placeholder="Search interests or add your own"
           />
 

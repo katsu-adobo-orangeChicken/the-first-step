@@ -1,5 +1,5 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useOnboardingDraftSection } from "../data/onboarding-persistence.js";
 import MultiStepFormWrapper from "./component-multiStepFormWrapper.jsx";
 import MultiSelect from "./component-multiSelect.jsx";
 import SearchableMultiSelect from "./component-searchableMultiSelect.jsx";
@@ -30,19 +30,18 @@ const experienceList = [
 
 export default function OnboardingSurvey() {
   const navigate = useNavigate();
-  const [selectedGoals, setSelectedGoals] = useState([]);
-  const [confidenceLevel, setConfidenceLevel] = useState("");
-  const [interestedIndustries, setInterestedIndustries] = useState([])
-  const [experienceLevel, setExperienceLevel] = useState([])
+  const [surveyData, setSurveyData] = useOnboardingDraftSection("survey");
+
+  const updateSurveyField = (field, value) => {
+    setSurveyData((prevSurveyData) => ({
+      ...prevSurveyData,
+      [field]: value,
+    }));
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Survey Submitted:", {
-      goals: selectedGoals,
-      confidenceLevel,
-      interestedIndustries,
-      experienceLevel,
-    });
+    console.log("Survey Submitted:", surveyData);
     navigate("/onboarding-process/build-profile/survey/track");
   };
 
@@ -57,8 +56,8 @@ export default function OnboardingSurvey() {
           <SearchableMultiSelect
             label="What are your main goals?"
             options={learningGoals}
-            selectedValues={selectedGoals}
-            onChange={setSelectedGoals}
+            selectedValues={surveyData.goals}
+            onChange={(goals) => updateSurveyField("goals", goals)}
             allowCustom={false}
             placeholder="Search goals"
           />
@@ -73,8 +72,10 @@ export default function OnboardingSurvey() {
             <select
               id="confidenceLevel"
               name="confidenceLevel"
-              value={confidenceLevel}
-              onChange={(event) => setConfidenceLevel(event.target.value)}
+              value={surveyData.confidenceLevel}
+              onChange={(event) =>
+                updateSurveyField("confidenceLevel", event.target.value)
+              }
               className="w-full rounded-lg border border-slate-800 bg-slate-950 px-4 py-2.5 text-slate-100 transition-colors focus:border-blue-500 focus:outline-none"
               required
             >
@@ -90,8 +91,10 @@ export default function OnboardingSurvey() {
           <SearchableMultiSelect 
             label="What are your industries of interest?"
             options={industryList}
-            selectedValues={interestedIndustries}
-            onChange={setInterestedIndustries}
+            selectedValues={surveyData.interestedIndustries}
+            onChange={(interestedIndustries) =>
+              updateSurveyField("interestedIndustries", interestedIndustries)
+            }
             allowCustom={false}
             placeholder="Filter industries"
           
@@ -101,8 +104,10 @@ export default function OnboardingSurvey() {
           <MultiSelect 
             label="What is your experience level?"
             options={experienceList}
-            selectedValues={experienceLevel}
-            onChange={setExperienceLevel}
+            selectedValues={surveyData.experienceLevel}
+            onChange={(experienceLevel) =>
+              updateSurveyField("experienceLevel", experienceLevel)
+            }
           
 
           />
