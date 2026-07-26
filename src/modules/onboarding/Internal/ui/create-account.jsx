@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useOnboardingDraftSection } from "../data/onboarding-persistence.js";
 import MultiStepFormWrapper from "./component-multiStepFormWrapper.jsx";
 import StepsNavBar from "./component-stepNavigationBar.jsx";
 
 export default function CreateAccount() {
   const navigate = useNavigate();
-  
-    const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
+
+  const [accountData, setAccountData] = useOnboardingDraftSection("account");
+  const [credentials, setCredentials] = useState({
     password: "",
     confirmPassword: ""
   });
@@ -16,15 +16,27 @@ export default function CreateAccount() {
   const handleInputChange = (event) => {
     const { name, value } = event.target;
 
-    setFormData((prevFormData) => ({
-      ...prevFormData,
+    if (name === "password" || name === "confirmPassword") {
+      setCredentials((prevCredentials) => ({
+        ...prevCredentials,
+        [name]: value,
+      }));
+      return;
+    }
+
+    setAccountData((prevAccountData) => ({
+      ...prevAccountData,
       [name]: value,
     }));
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Form Submitted:", formData);
+    console.log("Form Submitted:", {
+      ...accountData,
+      password: credentials.password,
+      confirmPassword: credentials.confirmPassword,
+    });
     navigate("/onboarding-process/build-profile");
   };
 
@@ -44,7 +56,7 @@ export default function CreateAccount() {
               id="fullName"
               type="text"
               name="fullName"
-              value={formData.fullName}
+              value={accountData.fullName}
               onChange={handleInputChange}
               placeholder="John Doe"
               className="w-full rounded-lg border border-slate-800 bg-slate-950 px-4 py-2.5 text-slate-100 transition-colors placeholder:text-slate-600 focus:border-blue-500 focus:outline-none"
@@ -60,7 +72,7 @@ export default function CreateAccount() {
               id="email"
               type="email"
               name="email"
-              value={formData.email}
+              value={accountData.email}
               onChange={handleInputChange}
               placeholder="you@example.com"
               className="w-full rounded-lg border border-slate-800 bg-slate-950 px-4 py-2.5 text-slate-100 transition-colors placeholder:text-slate-600 focus:border-blue-500 focus:outline-none"
@@ -76,7 +88,7 @@ export default function CreateAccount() {
               id="password"
               type="password"
               name="password"
-              value={formData.password}
+              value={credentials.password}
               onChange={handleInputChange}
               placeholder="********"
               className="w-full rounded-lg border border-slate-800 bg-slate-950 px-4 py-2.5 text-slate-100 transition-colors placeholder:text-slate-600 focus:border-blue-500 focus:outline-none"
@@ -92,7 +104,7 @@ export default function CreateAccount() {
                 id="confirm-password"
                 type="password"
                 name="confirmPassword"
-                value={formData.confirmPassword}
+                value={credentials.confirmPassword}
                 onChange={handleInputChange}
                 placeholder="Confirm"
                 className="w-full rounded-lg border border-slate-800 bg-slate-950 px-4 py-2.5 text-slate-100 transition-colors placeholder:text-slate-600 focus:border-blue-500 focus:outline-none"

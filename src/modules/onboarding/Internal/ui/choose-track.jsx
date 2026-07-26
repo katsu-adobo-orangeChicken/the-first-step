@@ -1,4 +1,9 @@
 import { Link } from "react-router-dom";
+import {
+  clearOnboardingDraft,
+  loadOnboardingDraft,
+  saveOnboardingDraft,
+} from "../data/onboarding-persistence.js";
 import MultiStepFormWrapper from "./component-multiStepFormWrapper.jsx";
 
 const tracks = [
@@ -23,6 +28,17 @@ const tracks = [
 ];
 
 export default function ChooseTrack() {
+  const handleTrackSelect = (trackTitle) => {
+    const completedDraft = {
+      ...loadOnboardingDraft(),
+      track: trackTitle,
+    };
+
+    saveOnboardingDraft(completedDraft);
+    console.log("Onboarding Completed:", completedDraft);
+    clearOnboardingDraft();
+  };
+
   return (
     <MultiStepFormWrapper
       currentStep={4}
@@ -44,6 +60,7 @@ export default function ChooseTrack() {
 
             <Link
               to="/discover"
+              onClick={() => handleTrackSelect(track.title)}
               className="mt-6 rounded-lg bg-blue-600 px-4 py-3 text-center text-sm font-semibold text-white shadow-md transition-colors hover:bg-blue-500"
             >
               Select Track
