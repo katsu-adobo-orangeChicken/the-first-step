@@ -8,6 +8,7 @@ export const projects = [
     category: ["Community", "Education"],
     difficulty: "Beginner",
     teamSize: "4/8",
+    permission: "public",
     finalOutcome: "Community event plan",
     longDescription:
       "This starter project focuses on coordination, communication, and community impact. You will help shape logistics, gather support, and leave behind a clear plan the host can use again.",
@@ -21,6 +22,7 @@ export const projects = [
     category: ["Community", "Environment"],
     difficulty: "Beginner",
     teamSize: "6/12",
+    permission: "public",
     finalOutcome: "Park cleanup action plan",
     longDescription:
       "Ideal for early contributors who want to make a visible difference. The project includes planning, outreach, and follow-up documentation for a cleaner neighborhood space.",
@@ -34,6 +36,7 @@ export const projects = [
     category: ["Education", "Technology"],
     difficulty: "Intermediate",
     teamSize: "5/10",
+    permission: "private",
     finalOutcome: "Intro coding workshop curriculum",
     longDescription:
       "This project blends teaching, facilitation, and hands-on problem solving. You can contribute by shaping activities, supporting learners, and refining the workshop outline.",
@@ -47,6 +50,7 @@ export const projects = [
     category: ["Community", "Education"],
     difficulty: "Beginner",
     teamSize: "3/6",
+    permission: "public",
     finalOutcome: "Library improvement proposal",
     longDescription:
       "A good fit for people who enjoy organizing, community service, and simple research. The project uses a light-touch scope to keep the experience approachable.",
@@ -60,6 +64,7 @@ export const projects = [
     category: ["Community", "Environment"],
     difficulty: "Beginner",
     teamSize: "7/12",
+    permission: "private",
     finalOutcome: "Seasonal garden maintenance plan",
     longDescription:
       "This project is a practical way to build teamwork and stewardship. You can help shape the growing plan, define maintenance tasks, and document what worked.",
@@ -73,6 +78,7 @@ export const projects = [
     category: ["Technology", "Community"],
     difficulty: "Intermediate",
     teamSize: "4/8",
+    permission: "private",
     finalOutcome: "Digital support session guide",
     longDescription:
       "A strong skeleton project for people who want to practice empathy, communication, and practical support. It balances service and user-centered thinking.",
@@ -86,6 +92,7 @@ export const projects = [
     category: ["Arts", "Community"],
     difficulty: "Intermediate",
     teamSize: "5/9",
+    permission: "public",
     finalOutcome: "Public mural concept board",
     longDescription:
       "Use this project to explore creative collaboration, stakeholder feedback, and presentation work. It is a flexible option for visual thinkers and communicators.",
@@ -99,6 +106,7 @@ export const projects = [
     category: ["Community", "Health"],
     difficulty: "Advanced",
     teamSize: "8/14",
+    permission: "private",
     finalOutcome: "Emergency response support plan",
     longDescription:
       "A more structured project for contributors who want to practice planning and coordination under pressure. It is best used as a high-level prototype for now.",
@@ -112,6 +120,7 @@ export const projects = [
     category: ["Education", "Community"],
     difficulty: "Beginner",
     teamSize: "4/10",
+    permission: "public",
     finalOutcome: "Tutoring schedule and lesson plan",
     longDescription:
       "A warm, human-centered project that focuses on routine care, clear communication, and creating a dependable support experience.",
@@ -125,6 +134,7 @@ export const projects = [
     category: ["Arts", "Community"],
     difficulty: "Intermediate",
     teamSize: "6/10",
+    permission: "public",
     finalOutcome: "Festival run-of-show plan",
     longDescription:
       "This project offers a chance to work on event flow, audience experience, and coordination in a relaxed but structured setting.",
@@ -136,3 +146,9 @@ export const projectSections = {
   "For You": [2, 10, 1],
   New: [3, 7, 8, 9],
 };
+
+export function getBaseProjectById(projectId) {
+  const normalizedProjectId = Number(projectId);
+
+  return projects.find((project) => project.id === normalizedProjectId);
+}

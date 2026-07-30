@@ -1,4 +1,9 @@
-import { CareerCatalogPage } from "../modules/career-catalog/PublicAPI";
+import {
+  CareerCatalogPage,
+  CreateProjectPage,
+  ProjectDetailPage,
+  StartProjectPage,
+} from "../modules/career-catalog/PublicAPI";
 import { LandingPage } from "../modules/landing-page/PublicAPI";
 import {
   BuildProfilePage,
@@ -6,6 +11,7 @@ import {
   SurveyPage,
   TrackPage,
 } from "../modules/onboarding/PublicAPI";
+import { ProjectDashboardPage } from "../modules/project-workspace/PublicAPI";
 
 import { Route, Routes, Link } from "react-router-dom";
 
@@ -42,6 +48,10 @@ export default function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/discover" element={<CareerCatalogPage />} />
+          <Route path="/discover/projects/new" element={<CreateProjectPage />} />
+          <Route path="/discover/projects/:projectId" element={<ProjectDetailPage />} />
+          <Route path="/discover/projects/:projectId/start" element={<StartProjectPage />} />
+          <Route path="/projects/:projectId/dashboard" element={<ProjectDashboardPage />} />
           <Route path="/onboarding-process" element={<OnboardingPage />} />
           <Route path="/onboarding-process/build-profile" element={<BuildProfilePage />} />
           <Route path="/onboarding-process/build-profile/survey" element={<SurveyPage />} />
