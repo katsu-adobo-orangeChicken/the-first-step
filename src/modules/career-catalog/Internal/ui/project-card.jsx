@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { getProjectTeamStatus } from "../data/project-storage.js";
 
 export default function ProjectCard({ projectObject }) {
   const difficultyColors = {
@@ -7,6 +8,7 @@ export default function ProjectCard({ projectObject }) {
     Advanced: "text-rose-600",
   };
   const isPublic = projectObject.isPublic ?? projectObject.permission !== "private";
+  const { isFull, teamSizeLabel } = getProjectTeamStatus(projectObject);
 
   return (
     <Link
@@ -46,8 +48,13 @@ export default function ProjectCard({ projectObject }) {
 
         <div className="mt-4 flex flex-wrap gap-2 text-xs">
           <span className="rounded-full bg-slate-100 px-2.5 py-1 font-medium text-slate-700">
-            Team: {projectObject.teamSize}
+            Team: {teamSizeLabel}
           </span>
+          {isFull ? (
+            <span className="rounded-full bg-rose-50 px-2.5 py-1 font-medium text-rose-700">
+              Full
+            </span>
+          ) : null}
           <span className="rounded-full bg-blue-50 px-2.5 py-1 font-medium text-blue-700">
             {projectObject.category.join(", ")}
           </span>

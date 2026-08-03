@@ -3,14 +3,20 @@ import { Link, useNavigate } from "react-router-dom";
 import { createWorkspaceForProject } from "../../../project-workspace/PublicAPI";
 import { createProject } from "../data/project-storage.js";
 
+const categories = ["Community", "Technology", "Education", "Arts", "Business", "Health"];
+const difficultyLevels = ["Beginner", "Intermediate", "Advanced"];
+const timeCommitments = ["2-3 hours/week", "4-6 hours/week", "7-8 hours/week", "10+ hours/week"];
+
 const defaultProjectForm = {
   title: "",
   description: "",
   longDescription: "",
   category: "Community",
   difficulty: "Beginner",
-  teamSize: "1/5",
+  maxTeamSize: 4,
   finalOutcome: "",
+  isPrivate: false,
+  expectedTimeCommitment: timeCommitments[0],
 };
 
 export default function CreateProjectPage() {
@@ -26,17 +32,54 @@ export default function CreateProjectPage() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    const trimmedDescription = projectForm.description.trim();
+
     const nextProject = createProject({
       ...projectForm,
-      description: projectForm.description.trim(),
-      longDescription: projectForm.longDescription.trim() || projectForm.description.trim(),
       title: projectForm.title.trim(),
+      description: trimmedDescription,
+      longDescription: projectForm.longDescription.trim() || trimmedDescription,
       finalOutcome: projectForm.finalOutcome.trim() || "Project portfolio artifact",
     });
 
     createWorkspaceForProject(nextProject, "created");
     navigate(`/projects/${nextProject.id}/dashboard`);
   };
+
+  const switchTrackClassName = [
+    "relative",
+    "inline-flex",
+    "h-6",
+    "w-11",
+    "shrink-0",
+    "cursor-pointer",
+    "rounded-full",
+    "border-2",
+    "border-transparent",
+    "transition-colors",
+    "duration-200",
+    "ease-in-out",
+    "focus:outline-none",
+    "focus:ring-2",
+    "focus:ring-blue-500",
+    "focus:ring-offset-2",
+    projectForm.isPrivate ? "bg-slate-600" : "bg-slate-200",
+  ].join(" ");
+
+  const switchThumbClassName = [
+    "pointer-events-none",
+    "inline-block",
+    "h-5",
+    "w-5",
+    "rounded-full",
+    "bg-white",
+    "shadow",
+    "transition",
+    "duration-200",
+    "ease-in-out",
+    projectForm.isPrivate ? "translate-x-5" : "translate-x-0",
+  ].join(" ");
 
   return (
     <section className="bg-slate-50 px-4 py-8 text-slate-900 sm:px-6 lg:px-8">
@@ -96,11 +139,9 @@ export default function CreateProjectPage() {
                   onChange={(event) => updateField("category", event.target.value)}
                   className="rounded-xl border border-slate-200 px-4 py-3 font-normal outline-none focus:border-blue-500"
                 >
-                  {["Community", "Technology", "Education", "Arts", "Business", "Health"].map(
-                    (category) => (
-                      <option key={category}>{category}</option>
-                    )
-                  )}
+                  {categories.map((category) => (
+                    <option key={category}>{category}</option>
+                  ))}
                 </select>
               </label>
 
@@ -111,7 +152,7 @@ export default function CreateProjectPage() {
                   onChange={(event) => updateField("difficulty", event.target.value)}
                   className="rounded-xl border border-slate-200 px-4 py-3 font-normal outline-none focus:border-blue-500"
                 >
-                  {["Beginner", "Intermediate", "Advanced"].map((difficulty) => (
+                  {difficultyLevels.map((difficulty) => (
                     <option key={difficulty}>{difficulty}</option>
                   ))}
                 </select>
@@ -120,12 +161,52 @@ export default function CreateProjectPage() {
               <label className="grid gap-2 text-sm font-semibold text-slate-800">
                 Team size
                 <input
-                  value={projectForm.teamSize}
-                  onChange={(event) => updateField("teamSize", event.target.value)}
+                  value={projectForm.maxTeamSize}
+                  type="number"
+                  min="1"
+                  max="12"
+                  onChange={(event) => {
+                    const value = event.target.value;
+                    updateField("maxTeamSize", value === "" ? "" : parseInt(value, 10));
+                  }}
                   className="rounded-xl border border-slate-200 px-4 py-3 font-normal outline-none focus:border-blue-500"
-                  placeholder="1/5"
+                  placeholder="1"
                 />
               </label>
+
+              <label className="grid gap-2 text-sm font-semibold text-slate-800">
+                Expected Time Commitment
+
+                <select
+                  value={projectForm.expectedTimeCommitment}
+                  onChange={(event) => updateField("expectedTimeCommitment", event.target.value)}
+                  className="rounded-xl border border-slate-200 px-4 py-3 font-normal outline-none focus:border-blue-500"
+                >
+                  {timeCommitments.map((timeCommitment) => (
+                    <option key={timeCommitment}>{timeCommitment}</option>
+                  ))}
+                </select>
+              </label>
+            </div>
+
+            <div className="flex items-center justify-between rounded-xl border border-slate-200 p-4">
+              <div>
+                <p className="text-sm font-semibold text-slate-800">Private Project</p>
+                <p className="mt-1 text-sm font-normal text-slate-500">
+                  Can other people freely join your project?
+                </p>
+              </div>
+
+              <button
+                type="button"
+                role="switch"
+                aria-checked={projectForm.isPrivate}
+                aria-label="Toggle private project"
+                onClick={() => updateField("isPrivate", !projectForm.isPrivate)}
+                className={switchTrackClassName}
+              >
+                <span className={switchThumbClassName} />
+              </button>
             </div>
 
             <label className="grid gap-2 text-sm font-semibold text-slate-800">

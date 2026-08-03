@@ -1,3 +1,11 @@
+import {
+  addProjectJoinRequest,
+  addProjectMember,
+  CURRENT_USER_ID,
+  getProjectById,
+  isProjectMember,
+} from "../../../career-catalog/Internal/data/project-storage.js";
+
 const WORKSPACES_KEY = "the-first-step:project-workspaces";
 const JOIN_REQUESTS_KEY = "the-first-step:project-join-requests";
 
@@ -60,6 +68,27 @@ function createDefaultDeliverables(project) {
   ];
 }
 
+function formatMemberName(memberId) {
+  if (memberId === CURRENT_USER_ID) {
+    return "You";
+  }
+
+  if (String(memberId).startsWith("seed-member-")) {
+    const memberNumber = String(memberId).replace("seed-member-", "");
+    return `Starter member ${memberNumber}`;
+  }
+
+  return memberId;
+}
+
+function createTeamMembersForProject(project, workspaceType) {
+  if (Array.isArray(project.memberIds) && project.memberIds.length > 0) {
+    return project.memberIds.map(formatMemberName);
+  }
+
+  return workspaceType === "created" ? ["You"] : ["You"];
+}
+
 export function loadWorkspaces() {
   if (!canUseLocalStorage()) {
     return [];
@@ -100,6 +129,19 @@ export function loadJoinRequests() {
   }
 }
 
+function normalizeJoinRequest(joinRequest) {
+  const projectId = joinRequest.projectId || joinRequest.project?.id;
+  const requesterId = joinRequest.requesterId || CURRENT_USER_ID;
+
+  return {
+    ...joinRequest,
+    id: joinRequest.id || `join-request-${projectId}-${requesterId}`,
+    projectId,
+    requesterId,
+    status: joinRequest.status || "pending",
+  };
+}
+
 function saveJoinRequests(joinRequests) {
   if (!canUseLocalStorage()) {
     return;
@@ -119,8 +161,11 @@ export function getWorkspaceByProjectId(projectId) {
 }
 
 export function getJoinRequestByProjectId(projectId) {
-  return loadJoinRequests().find(
-    (joinRequest) => String(joinRequest.project.id) === String(projectId)
+  return loadJoinRequests().map(normalizeJoinRequest).find(
+    (joinRequest) =>
+      String(joinRequest.projectId) === String(projectId) &&
+      joinRequest.requesterId === CURRENT_USER_ID &&
+      joinRequest.status === "pending"
   );
 }
 
@@ -139,10 +184,7 @@ export function createWorkspaceForProject(project, workspaceType = "joined") {
     type: workspaceType,
     project,
     userRole: workspaceType === "created" ? "Project owner" : "Contributor",
-    teamMembers:
-      workspaceType === "created"
-        ? ["You"]
-        : ["You", "Maya Chen", "Jordan Lee", "Sam Rivera"],
+    teamMembers: createTeamMembersForProject(project, workspaceType),
     milestones: createDefaultMilestones(project),
     tasks: createDefaultTasks(project),
     deliverables: createDefaultDeliverables(project),
@@ -153,10 +195,14 @@ export function createWorkspaceForProject(project, workspaceType = "joined") {
   return nextWorkspace;
 }
 
-export function requestToJoinProject(project) {
-  const joinRequests = loadJoinRequests();
+export function requestToJoinProject(project, requesterId = CURRENT_USER_ID) {
+  const currentProject = getProjectById(project.id) || project;
+  const joinRequests = loadJoinRequests().map(normalizeJoinRequest);
   const existingRequest = joinRequests.find(
-    (joinRequest) => String(joinRequest.project.id) === String(project.id)
+    (joinRequest) =>
+      String(joinRequest.projectId) === String(currentProject.id) &&
+      joinRequest.requesterId === requesterId &&
+      joinRequest.status === "pending"
   );
 
   if (existingRequest) {
@@ -164,26 +210,58 @@ export function requestToJoinProject(project) {
   }
 
   const nextRequest = {
-    id: `join-request-${project.id}`,
-    project,
+    id: `join-request-${currentProject.id}-${requesterId}`,
+    projectId: currentProject.id,
+    requesterId,
+    project: currentProject,
     status: "pending",
     requestedAt: new Date().toISOString(),
   };
 
+  addProjectJoinRequest(currentProject.id, nextRequest.id);
   saveJoinRequests([nextRequest, ...joinRequests]);
   return nextRequest;
 }
 
-export function joinProject(project) {
-  if (project.permission === "private") {
+export function joinProject(project, memberId = CURRENT_USER_ID) {
+  const currentProject = getProjectById(project.id) || project;
+  const currentMembersCount = Array.isArray(currentProject.memberIds)
+    ? currentProject.memberIds.length
+    : 0;
+  const maxTeamSize = Number(currentProject.maxTeamSize || 1);
+
+  if (currentMembersCount >= maxTeamSize) {
     return {
-      status: "pending",
-      request: requestToJoinProject(project),
+      status: "full",
     };
   }
 
+  if (isProjectMember(currentProject, memberId)) {
+    return {
+      status: "already-member",
+      workspace: createWorkspaceForProject(currentProject, "joined"),
+    };
+  }
+
+  if (currentProject.permission === "private") {
+    return {
+      status: "pending",
+      request: requestToJoinProject(currentProject, memberId),
+    };
+  }
+
+  const addMemberResult = addProjectMember(currentProject.id, memberId);
+
+  if (addMemberResult.status === "full") {
+    return {
+      status: "full",
+    };
+  }
+
+  const joinedProject = addMemberResult.project || currentProject;
+
   return {
     status: "joined",
-    workspace: createWorkspaceForProject(project, "joined"),
+    workspace: createWorkspaceForProject(joinedProject, "joined"),
   };
 }

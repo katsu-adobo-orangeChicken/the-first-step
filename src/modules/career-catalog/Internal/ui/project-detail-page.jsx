@@ -1,8 +1,8 @@
-import { Link, Navigate, useParams, useNavigate } from "react-router-dom";
-import { getProjectById } from "../data/project-storage.js";
 import { useState } from "react";
+import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 
 import { getJoinRequestByProjectId, joinProject } from "../../../project-workspace/PublicAPI";
+import { getProjectById, getProjectTeamStatus } from "../data/project-storage.js";
 
 export default function ProjectDetailPage() {
   const { projectId } = useParams();
@@ -17,17 +17,34 @@ export default function ProjectDetailPage() {
   }
 
   const isPrivateProject = project.permission === "private";
+  const { isFull, teamSizeLabel } = getProjectTeamStatus(project);
 
   const handleJoinProject = () => {
+    if (isFull) {
+      return;
+    }
+
     const result = joinProject(project);
 
-    if (result.status === "joined") {
+    if (result.status === "joined" || result.status === "already-member") {
       navigate(`/projects/${project.id}/dashboard`);
+      return;
+    }
+
+    if (result.status === "full") {
       return;
     }
 
     setRequestState(result.request);
   };
+
+  const requestedDate = requestState
+    ? new Date(requestState.requestedAt).toLocaleDateString(undefined, {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      })
+    : "";
 
   return (
     <section className="bg-slate-50 px-4 py-8 text-slate-900 sm:px-6 lg:px-8">
@@ -63,20 +80,34 @@ export default function ProjectDetailPage() {
                 {project.longDescription || project.description}
               </p>
 
-              <button
-                type="button"
-                onClick={handleJoinProject}
-                className="mt-5 block w-full rounded-xl bg-blue-600 px-4 py-3 text-center text-sm font-semibold text-white transition hover:bg-blue-500"
-              >
-                {requestState ? "Request sent" : isPrivateProject ? "Request to join" : "Join project"}
-              </button>
+              {requestState ? (
+                <div className="mt-5 rounded-xl bg-slate-50 px-4 py-3 text-center text-sm font-semibold text-slate-600">
+                  Pending request
+                  <span className="block pt-1 text-xs font-medium text-slate-500">
+                    Requested on {requestedDate}
+                  </span>
+                </div>
+              ) : (
+                <button
+                  type="button"
+                  onClick={handleJoinProject}
+                  disabled={isFull}
+                  className={`mt-5 block w-full rounded-xl px-4 py-3 text-center text-sm font-semibold transition ${
+                    isFull
+                      ? "cursor-not-allowed bg-slate-200 text-slate-500"
+                      : "bg-blue-600 text-white hover:bg-blue-500"
+                  }`}
+                >
+                  {isFull ? "Project full" : isPrivateProject ? "Request to join" : "Join project"}
+                </button>
+              )}
             </div>
           </div>
 
           <div className="grid gap-6 md:grid-cols-3">
             {[
               ["Difficulty", project.difficulty],
-              ["Team size", project.teamSize],
+              ["Team size", teamSizeLabel],
               ["Final output", project.finalOutcome],
             ].map(([label, value]) => (
               <div key={label} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">

@@ -4,7 +4,7 @@ import {
   getJoinRequestByProjectId,
   joinProject,
 } from "../../../project-workspace/PublicAPI";
-import { getProjectById } from "../data/project-storage.js";
+import { getProjectById, getProjectTeamStatus } from "../data/project-storage.js";
 
 export default function StartProjectPage() {
   const { projectId } = useParams();
@@ -19,12 +19,21 @@ export default function StartProjectPage() {
   }
 
   const isPrivateProject = project.permission === "private";
+  const { isFull, teamSizeLabel } = getProjectTeamStatus(project);
 
   const handleJoinProject = () => {
+    if (isFull) {
+      return;
+    }
+
     const result = joinProject(project);
 
-    if (result.status === "joined") {
+    if (result.status === "joined" || result.status === "already-member") {
       navigate(`/projects/${project.id}/dashboard`);
+      return;
+    }
+
+    if (result.status === "full") {
       return;
     }
 
@@ -86,27 +95,36 @@ export default function StartProjectPage() {
               <>
                 <span
                   className={`rounded-full px-3 py-1 text-xs font-semibold ${
-                    isPrivateProject
+                    isFull
+                      ? "bg-rose-50 text-rose-700"
+                      : isPrivateProject
                       ? "bg-amber-50 text-amber-700"
                       : "bg-emerald-50 text-emerald-700"
                   }`}
                 >
-                  {isPrivateProject ? "Private project" : "Public project"}
+                  {isFull ? "Project full" : isPrivateProject ? "Private project" : "Public project"}
                 </span>
                 <h2 className="mt-4 text-2xl font-semibold text-slate-950">
-                  {isPrivateProject ? "Request to join" : "Join instantly"}
+                  {isFull ? "Team is at capacity" : isPrivateProject ? "Request to join" : "Join instantly"}
                 </h2>
                 <p className="mt-3 text-sm leading-6 text-slate-600">
-                  {isPrivateProject
+                  {isFull
+                    ? "This project has reached its current team limit."
+                    : isPrivateProject
                     ? "Send a request to the owner. You will wait for acceptance before seeing the workspace."
                     : "This project is open, so joining will take you straight to the project dashboard."}
                 </p>
                 <button
                   type="button"
-                  className="mt-6 w-full rounded-xl bg-blue-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-blue-500"
+                  className={`mt-6 w-full rounded-xl px-4 py-3 text-sm font-semibold transition ${
+                    isFull
+                      ? "cursor-not-allowed bg-slate-200 text-slate-500"
+                      : "bg-blue-600 text-white hover:bg-blue-500"
+                  }`}
                   onClick={handleJoinProject}
+                  disabled={isFull}
                 >
-                  {isPrivateProject ? "Request to join" : "Join project"}
+                  {isFull ? "Project full" : isPrivateProject ? "Request to join" : "Join project"}
                 </button>
               </>
             )}
@@ -127,7 +145,7 @@ export default function StartProjectPage() {
               </div>
               <div className="rounded-xl bg-slate-50 p-3">
                 <p className="font-semibold text-slate-500">Team</p>
-                <p className="mt-1 text-slate-800">{project.teamSize}</p>
+                <p className="mt-1 text-slate-800">{teamSizeLabel}</p>
               </div>
               <div className="rounded-xl bg-slate-50 p-3">
                 <p className="font-semibold text-slate-500">Outcome</p>
