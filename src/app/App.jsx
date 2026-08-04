@@ -20,10 +20,13 @@ export default function App() {
     <div className="min-h-screen bg-slate-950 font-sans text-slate-100">
       <header className="sticky top-0 z-20 border-b border-slate-800/80 bg-slate-950/90 px-4 py-4 backdrop-blur sm:px-6 lg:px-8">
         <nav className="mx-auto flex max-w-7xl items-center justify-between gap-4">
-          <Link to="/" className="text-lg font-bold text-white">
-            The First Step
-          </Link>
-
+         <Link to="/" className="flex items-center">
+  <img
+    src="/images/the-first-step-logo.png"
+    alt="The First Step"
+    className="h-20 w-auto object-contain"
+  />
+</Link>
           <div className="hidden items-center gap-6 text-sm font-medium text-slate-300 sm:flex">
             <Link to="/discover" className="transition-colors hover:text-white">
               Discover
