@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { getProjectTeamStatus } from "../data/project-storage.js";
 
-export default function ProjectCard({ projectObject }) {
+export default function ProjectCard({ projectObject, to }) {
   const difficultyColors = {
     Beginner: "text-emerald-600",
     Intermediate: "text-amber-600",
@@ -12,7 +12,7 @@ export default function ProjectCard({ projectObject }) {
 
   return (
     <Link
-      to={`/discover/projects/${projectObject.id}`}
+      to={to || `/discover/projects/${projectObject.id}`}
       className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-transform duration-200 hover:-translate-y-1 hover:shadow-md"
     >
       <div className="relative h-44 bg-slate-100">

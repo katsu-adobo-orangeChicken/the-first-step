@@ -1,18 +1,81 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import {
+  createWorkspaceForProject,
   getJoinRequestByProjectId,
-  joinProject,
+  requestToJoinProject,
 } from "../../../project-workspace/PublicAPI";
-import { getProjectById, getProjectTeamStatus } from "../data/project-storage.js";
+import { getProjectTeamStatus } from "../data/project-storage.js";
+import {
+  getProjectByIdFromBackend,
+  joinDiscoveryProject,
+} from "../data/project-service.js";
 
 export default function StartProjectPage() {
   const { projectId } = useParams();
   const navigate = useNavigate();
-  const project = getProjectById(projectId);
-  const [pendingRequest, setPendingRequest] = useState(() =>
-    project ? getJoinRequestByProjectId(project.id) : null
-  );
+  const [project, setProject] = useState(null);
+  const [isLoadingProject, setIsLoadingProject] = useState(true);
+  const [projectLoadError, setProjectLoadError] = useState("");
+  const [isJoiningProject, setIsJoiningProject] = useState(false);
+  const [joinError, setJoinError] = useState("");
+  const [pendingRequest, setPendingRequest] = useState(null);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    async function loadProject() {
+      setIsLoadingProject(true);
+      setProjectLoadError("");
+
+      try {
+        const loadedProject = await getProjectByIdFromBackend(projectId);
+
+        if (isMounted) {
+          setProject(loadedProject);
+          setPendingRequest(
+            loadedProject ? getJoinRequestByProjectId(loadedProject.id) : null
+          );
+        }
+      } catch (error) {
+        console.warn("Unable to load project.", error);
+
+        if (isMounted) {
+          setProjectLoadError("Project could not be loaded from Supabase. Check the backend setup and try again.");
+        }
+      } finally {
+        if (isMounted) {
+          setIsLoadingProject(false);
+        }
+      }
+    }
+
+    loadProject();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [projectId]);
+
+  if (isLoadingProject) {
+    return (
+      <section className="bg-slate-50 px-4 py-8 text-slate-900 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-5xl rounded-2xl border border-slate-200 bg-white p-6 text-sm font-medium text-slate-600 shadow-sm">
+          Loading project...
+        </div>
+      </section>
+    );
+  }
+
+  if (projectLoadError) {
+    return (
+      <section className="bg-slate-50 px-4 py-8 text-slate-900 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-5xl rounded-2xl border border-rose-200 bg-rose-50 p-6 text-sm font-medium text-rose-700 shadow-sm">
+          {projectLoadError}
+        </div>
+      </section>
+    );
+  }
 
   if (!project) {
     return <Navigate to="/discover" replace />;
@@ -21,23 +84,38 @@ export default function StartProjectPage() {
   const isPrivateProject = project.permission === "private";
   const { isFull, teamSizeLabel } = getProjectTeamStatus(project);
 
-  const handleJoinProject = () => {
+  const handleJoinProject = async () => {
     if (isFull) {
       return;
     }
 
-    const result = joinProject(project);
+    setIsJoiningProject(true);
+    setJoinError("");
 
-    if (result.status === "joined" || result.status === "already-member") {
-      navigate(`/projects/${project.id}/dashboard`);
-      return;
+    try {
+      const result = await joinDiscoveryProject(project);
+      const updatedProject = result.project || project;
+
+      if (result.status === "joined" || result.status === "already-member") {
+        createWorkspaceForProject(updatedProject, "joined");
+        navigate(`/projects/${updatedProject.id}/dashboard`);
+        return;
+      }
+
+      if (result.status === "full") {
+        setProject(updatedProject);
+        return;
+      }
+
+      requestToJoinProject(updatedProject);
+      setProject(updatedProject);
+      setPendingRequest(result.request);
+    } catch (error) {
+      console.warn("Unable to join project.", error);
+      setJoinError("The project could not be joined right now. Please try again.");
+    } finally {
+      setIsJoiningProject(false);
     }
-
-    if (result.status === "full") {
-      return;
-    }
-
-    setPendingRequest(result.request);
   };
 
   return (
@@ -117,15 +195,26 @@ export default function StartProjectPage() {
                 <button
                   type="button"
                   className={`mt-6 w-full rounded-xl px-4 py-3 text-sm font-semibold transition ${
-                    isFull
+                    isFull || isJoiningProject
                       ? "cursor-not-allowed bg-slate-200 text-slate-500"
                       : "bg-blue-600 text-white hover:bg-blue-500"
                   }`}
                   onClick={handleJoinProject}
-                  disabled={isFull}
+                  disabled={isFull || isJoiningProject}
                 >
-                  {isFull ? "Project full" : isPrivateProject ? "Request to join" : "Join project"}
+                  {isJoiningProject
+                    ? "Updating project..."
+                    : isFull
+                    ? "Project full"
+                    : isPrivateProject
+                    ? "Request to join"
+                    : "Join project"}
                 </button>
+                {joinError ? (
+                  <div className="mt-4 rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm font-medium text-rose-700">
+                    {joinError}
+                  </div>
+                ) : null}
               </>
             )}
           </article>
