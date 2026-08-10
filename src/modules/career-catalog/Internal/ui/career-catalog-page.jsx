@@ -1,8 +1,8 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import ProjectCard from "./project-card";
-import { projectSections } from "../data/projects.js";
-import { getAllProjects } from "../data/project-storage.js";
+import { buildDiscoverySections, listProjects } from "../data/project-service.js";
+import { loadWorkspaces } from "../../../project-workspace/PublicAPI";
 
 export default function CareerCatalogPage() {
   const [userSearchInput, setUserSearchInput] = useState("");
@@ -10,7 +10,58 @@ export default function CareerCatalogPage() {
   const [filterDifficulty, setFilterDifficulty] = useState("");
   const [filterCategory, setFilterCategory] = useState("");
   const [isFilterPanelOpen, setIsFilterPanelOpen] = useState(false);
-  const allProjects = useMemo(() => getAllProjects(), []);
+  const [allProjects, setAllProjects] = useState([]);
+  const [isLoadingProjects, setIsLoadingProjects] = useState(true);
+  const [projectLoadError, setProjectLoadError] = useState("");
+
+  useEffect(() => {
+    let isMounted = true;
+
+    async function loadProjects() {
+      setIsLoadingProjects(true);
+      setProjectLoadError("");
+
+      try {
+        const projects = await listProjects();
+
+        if (isMounted) {
+          setAllProjects(projects);
+        }
+      } catch (error) {
+        console.warn("Unable to load discovery projects.", error);
+
+        if (isMounted) {
+          setProjectLoadError("Projects could not be loaded from Supabase. Check the backend setup and try again.");
+        }
+      } finally {
+        if (isMounted) {
+          setIsLoadingProjects(false);
+        }
+      }
+    }
+
+    loadProjects();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const yourProjects = useMemo(() => {
+    const createdProjects = allProjects.filter((project) =>
+      String(project.id).startsWith("created-")
+    );
+    const joinedProjects = loadWorkspaces().map((workspace) => workspace.project);
+    const projectMap = new Map();
+
+    [...createdProjects, ...joinedProjects].forEach((project) => {
+      if (project) {
+        projectMap.set(String(project.id), project);
+      }
+    });
+
+    return Array.from(projectMap.values());
+  }, [allProjects]);
   const categoryOptions = useMemo(
     () => Array.from(new Set(allProjects.flatMap((project) => project.category))).sort(),
     [allProjects]
@@ -48,9 +99,11 @@ export default function CareerCatalogPage() {
     });
   }, [allProjects, appliedSearchTerm, filterCategory, filterDifficulty]);
 
-  const getProjectByIDs = (ids) =>
-    filteredProjects.filter((project) => ids.includes(project.id));
   const isViewingResults = Boolean(appliedSearchTerm || filterDifficulty || filterCategory);
+  const discoverySections = useMemo(
+    () => buildDiscoverySections(filteredProjects),
+    [filteredProjects]
+  );
 
   return (
     <section className="bg-slate-50 px-4 py-8 sm:px-6 lg:px-8">
@@ -150,8 +203,20 @@ export default function CareerCatalogPage() {
                 </Link>
         </div>
 
+        {isLoadingProjects ? (
+          <div className="rounded-3xl border border-slate-200 bg-white p-6 text-sm font-medium text-slate-600 shadow-sm">
+            Loading projects...
+          </div>
+        ) : null}
 
-        {isViewingResults ? (
+        {projectLoadError ? (
+          <div className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm font-medium text-amber-800">
+            {projectLoadError}
+          </div>
+        ) : null}
+
+
+        {!isLoadingProjects && isViewingResults ? (
           <div className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6">
             <div className="mb-4 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
               <h2 className="text-xl font-semibold text-slate-900">
@@ -172,29 +237,29 @@ export default function CareerCatalogPage() {
               </div>
             )}
           </div>
-        ) : (
+        ) : !isLoadingProjects ? (
           <>
-            {allProjects.some((project) => String(project.id).startsWith("created-")) ? (
+            {yourProjects.length > 0 ? (
               <div className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6">
                 <div className="mb-4 flex items-center justify-between">
                   <h2 className="text-xl font-semibold text-slate-900">Your projects</h2>
                   <span className="text-sm text-slate-500">
-                    {allProjects.filter((project) => String(project.id).startsWith("created-")).length} projects
+                    {yourProjects.length} projects
                   </span>
                 </div>
                 <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-                  {allProjects
-                    .filter((project) => String(project.id).startsWith("created-"))
-                    .map((project) => (
-                      <ProjectCard key={project.id} projectObject={project} />
-                    ))}
+                  {yourProjects.map((project) => (
+                    <ProjectCard
+                      key={project.id}
+                      projectObject={project}
+                      to={`/projects/${project.id}/dashboard`}
+                    />
+                  ))}
                 </div>
               </div>
             ) : null}
 
-            {Object.entries(projectSections).map(([sectionName, projectIds]) => {
-            const sectionProjects = getProjectByIDs(projectIds);
-
+            {discoverySections.map(([sectionName, sectionProjects]) => {
             return (
               <div key={sectionName} className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6">
                 <div className="mb-4 flex items-center justify-between">
@@ -210,7 +275,7 @@ export default function CareerCatalogPage() {
             );
             })}
           </>
-        )}
+        ) : null}
       </div>
     </section>
   );

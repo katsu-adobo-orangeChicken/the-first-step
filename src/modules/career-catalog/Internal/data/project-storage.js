@@ -212,6 +212,19 @@ export function addProjectJoinRequest(projectId, joinRequestId) {
   });
 }
 
+export function updateProject(projectId, projectDetails) {
+  const project = getProjectById(projectId);
+
+  if (!project) {
+    return null;
+  }
+
+  return saveProject({
+    ...project,
+    ...projectDetails,
+  });
+}
+
 export function addProjectMember(projectId, memberId = CURRENT_USER_ID) {
   const project = getProjectById(projectId);
 

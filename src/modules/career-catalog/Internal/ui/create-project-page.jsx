@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { createWorkspaceForProject } from "../../../project-workspace/PublicAPI";
-import { createProject } from "../data/project-storage.js";
+import { createProjectRecord } from "../data/project-service.js";
 
 const categories = ["Community", "Technology", "Education", "Arts", "Business", "Health"];
 const difficultyLevels = ["Beginner", "Intermediate", "Advanced"];
@@ -21,6 +21,8 @@ const defaultProjectForm = {
 
 export default function CreateProjectPage() {
   const [projectForm, setProjectForm] = useState(defaultProjectForm);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   const navigate = useNavigate();
 
   const updateField = (fieldName, value) => {
@@ -30,21 +32,30 @@ export default function CreateProjectPage() {
     }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    setIsSubmitting(true);
+    setSubmitError("");
 
     const trimmedDescription = projectForm.description.trim();
 
-    const nextProject = createProject({
-      ...projectForm,
-      title: projectForm.title.trim(),
-      description: trimmedDescription,
-      longDescription: projectForm.longDescription.trim() || trimmedDescription,
-      finalOutcome: projectForm.finalOutcome.trim() || "Project portfolio artifact",
-    });
+    try {
+      const nextProject = await createProjectRecord({
+        ...projectForm,
+        title: projectForm.title.trim(),
+        description: trimmedDescription,
+        longDescription: projectForm.longDescription.trim() || trimmedDescription,
+        finalOutcome: projectForm.finalOutcome.trim() || "Project portfolio artifact",
+        currentMemberCount: 1,
+      });
 
-    createWorkspaceForProject(nextProject, "created");
-    navigate(`/projects/${nextProject.id}/dashboard`);
+      createWorkspaceForProject(nextProject, "created");
+      navigate(`/projects/${nextProject.id}/dashboard`);
+    } catch (error) {
+      console.warn("Unable to create project.", error);
+      setSubmitError("Project could not be created. Please try again.");
+      setIsSubmitting(false);
+    }
   };
 
   const switchTrackClassName = [
@@ -219,11 +230,18 @@ export default function CreateProjectPage() {
               />
             </label>
 
+            {submitError ? (
+              <div className="rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm font-medium text-rose-700">
+                {submitError}
+              </div>
+            ) : null}
+
             <button
               type="submit"
+              disabled={isSubmitting}
               className="rounded-xl bg-blue-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-blue-500"
             >
-              Create workspace
+              {isSubmitting ? "Creating..." : "Create workspace"}
             </button>
           </form>
         </div>
