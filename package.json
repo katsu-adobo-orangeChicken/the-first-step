@@ -8,9 +8,10 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "test": "node --test src/modules/career-catalog/Internal/data/project-service.test.js",
     "lint": "eslint .",
     "lint:js": "eslint .",
-    "check": "npm run lint && npm run build"
+    "check": "npm run lint && npm run test && npm run build"
   },
   "repository": {
     "type": "git",

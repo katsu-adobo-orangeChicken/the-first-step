@@ -9,7 +9,9 @@
 
 ## Pasteable starter SQL
 
-Run this in the Supabase SQL editor for the first discovery-page backend pass.
+Run `supabase/migrations/202608190001_create_projects.sql` in the Supabase SQL
+editor for the first discovery-page backend pass. The SQL is duplicated below
+for convenience.
 
 ```sql
 create extension if not exists "pgcrypto";
