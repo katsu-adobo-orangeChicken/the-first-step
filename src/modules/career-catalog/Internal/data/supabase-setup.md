@@ -3,7 +3,7 @@
 1. Create a Supabase project.
 2. Add the following environment variables to your Vite app:
    - VITE_SUPABASE_URL
-   - VITE_SUPABASE_ANON_KEY
+   - VITE_SUPABASE_PUBLISHABLE_KEY
 3. Create the `projects` table.
 4. Enable read access for anonymous users or configure proper auth-based policies.
 
@@ -91,9 +91,10 @@ insert into public.projects (
 );
 ```
 
-The app reads from Supabase when `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`
-are present. If either value is missing, discovery falls back to the local mock
-projects for development.
+The app reads from Supabase when `VITE_SUPABASE_URL` and
+`VITE_SUPABASE_PUBLISHABLE_KEY` are present. `VITE_SUPABASE_ANON_KEY` is still
+supported as a legacy fallback. If either value is missing, discovery falls back
+to the local mock projects for development.
 
 Project creation also writes to Supabase when those environment variables are
 present. When Supabase is configured, list, detail, create, and team metadata

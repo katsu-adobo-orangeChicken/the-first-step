@@ -41,8 +41,11 @@ Add these environment variables in Vercel project settings:
 
 ```text
 VITE_SUPABASE_URL=https://your-project.supabase.co
-VITE_SUPABASE_ANON_KEY=your-anon-key
+VITE_SUPABASE_PUBLISHABLE_KEY=your-publishable-key
 ```
+
+`VITE_SUPABASE_ANON_KEY` is still supported as a legacy fallback for existing
+Supabase projects.
 
 Redeploy after saving environment variables.
 

@@ -12,17 +12,21 @@ function getRuntimeEnv() {
 
 export function getSupabaseConfig() {
   const runtimeEnv = getRuntimeEnv();
+  const supabaseKey =
+    runtimeEnv.VITE_SUPABASE_PUBLISHABLE_KEY ?? runtimeEnv.VITE_SUPABASE_ANON_KEY;
 
   return {
     supabaseUrl: runtimeEnv.VITE_SUPABASE_URL,
-    supabaseAnonKey: runtimeEnv.VITE_SUPABASE_ANON_KEY,
+    supabaseKey,
+    supabasePublishableKey: supabaseKey,
+    supabaseAnonKey: supabaseKey,
   };
 }
 
 export function isSupabaseConfigured() {
-  const { supabaseUrl, supabaseAnonKey } = getSupabaseConfig();
+  const { supabaseUrl, supabaseKey } = getSupabaseConfig();
 
-  return Boolean(supabaseUrl && supabaseAnonKey);
+  return Boolean(supabaseUrl && supabaseKey);
 }
 
 export function getSupabaseClient() {
@@ -31,11 +35,13 @@ export function getSupabaseClient() {
   }
 
   if (!supabaseClient) {
-    const { supabaseUrl, supabaseAnonKey } = getSupabaseConfig();
+    const { supabaseUrl, supabaseKey } = getSupabaseConfig();
 
-    supabaseClient = createClient(supabaseUrl, supabaseAnonKey, {
+    supabaseClient = createClient(supabaseUrl, supabaseKey, {
       auth: {
-        persistSession: false,
+        persistSession: true,
+        autoRefreshToken: true,
+        detectSessionInUrl: true,
       },
     });
   }
